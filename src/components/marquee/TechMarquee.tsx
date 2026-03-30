@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 
 const techs = [
   "Next.js",
-  "Electron",
+  "React",
+  "C# .NET",
   "Flutter",
   "Firebase",
   "MERN Stack",

@@ -68,7 +68,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
           className="text-lg md:text-xl text-foreground/70 font-light max-w-2xl"
         >
-          3rd-Year Software Engineering Undergraduate at
+          BSc (Hons) Software Engineering Undergraduate at
           <span className="text-walnut-light font-medium ml-1">
             NSBM Green University
           </span>

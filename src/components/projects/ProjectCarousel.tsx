@@ -9,29 +9,34 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    title: "Self-Hosted Media Server",
-    badge: "Final Year Project",
-    desc: "A comprehensive self-hosted media solution.",
-    color: "from-blue-900",
-  },
-  {
     title: "DegreeHub",
-    desc: "Targeted platform for Sri Lankan students.",
+    desc: "Cross-platform management system for academic degrees (Flutter & Firebase).",
     color: "from-emerald-900",
   },
   {
-    title: "Delta Travel",
-    desc: "Modern travel agency platform.",
-    color: "from-amber-900",
-  },
-  {
     title: "Easy Idama",
-    desc: "Real estate platform making property hunting easy.",
+    desc: "Sri Lankan real estate marketplace for land and property discovery.",
     color: "from-purple-900",
   },
   {
+    title: "StudyPlanner-Studee2.0",
+    desc: "Cloud-synced desktop productivity suite built with C# .NET and Firebase.",
+    color: "from-indigo-900",
+  },
+  {
+    title: "Self-Hosted Media Server",
+    badge: "Final Year Project",
+    desc: "Privacy-focused personal streaming and file management solution.",
+    color: "from-blue-900",
+  },
+  {
+    title: "Delta Travel",
+    desc: "Modern travel itinerary and booking platform.",
+    color: "from-amber-900",
+  },
+  {
     title: "My Flix",
-    desc: "Movie ticket booking platform.",
+    desc: "Cinematic movie discovery and ticket reservation hub.",
     color: "from-rose-900",
   },
 ];
