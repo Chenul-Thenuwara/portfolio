@@ -9,11 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    title: "DegreeHub",
-    desc: "Cross-platform management system for academic degrees (Flutter & Firebase).",
-    color: "from-emerald-900",
-  },
-  {
     title: "Easy Idama",
     desc: "Sri Lankan real estate marketplace for land and property discovery.",
     color: "from-purple-900",
@@ -28,11 +23,6 @@ const projects = [
     badge: "Final Year Project",
     desc: "Privacy-focused personal streaming and file management solution.",
     color: "from-blue-900",
-  },
-  {
-    title: "Delta Travel",
-    desc: "Modern travel itinerary and booking platform.",
-    color: "from-amber-900",
   },
   {
     title: "My Flix",
