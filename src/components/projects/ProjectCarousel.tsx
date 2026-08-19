@@ -249,7 +249,7 @@ export default function ProjectCarousel() {
       {/* Horizontal Carousel Container */}
       <div
         ref={scrollRef}
-        className="flex items-stretch gap-6 md:gap-8 overflow-x-auto scrollbar-none px-6 md:px-12 py-4 snap-x snap-mandatory scroll-smooth cursor-grab active:cursor-grabbing z-10"
+        className="flex items-stretch gap-6 md:gap-8 overflow-x-auto no-scrollbar scrollbar-none px-6 md:px-12 py-4 snap-x snap-mandatory scroll-smooth cursor-grab active:cursor-grabbing z-10"
       >
         {projects.map((project, idx) => (
           <motion.div
