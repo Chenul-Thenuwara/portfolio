@@ -12,89 +12,100 @@ interface Certificate {
   issuer: string;
   issuerShort: string;
   date: string;
+  grade?: string;
+  category?: string;
+  skills?: string;
   credentialId?: string;
   verifyUrl?: string;
   color: string;
   accentColor: string;
-  icon: string; // emoji / letter mark fallback
+  icon: string;
 }
 
 const certificates: Certificate[] = [
   {
-    title: "Cisco Certified Network Associate (CCNA)",
-    issuer: "Cisco",
-    issuerShort: "Cisco",
-    date: "2024",
-    verifyUrl: "https://www.credly.com/org/cisco/badge/ccna",
-    color: "from-blue-900/80",
-    accentColor: "#00B4D8",
-    icon: "C",
+    title: "BSc (Hons) Software Engineering",
+    issuer: "University of Plymouth (UK) · NSBM Green University",
+    issuerShort: "Plymouth / NSBM",
+    date: "2023 – 2026",
+    grade: "First Class Honours",
+    category: "Higher Education",
+    skills: "Final Project 79.6% · AI/ML (73%), Full-Stack (70%), Graphics (76%)",
+    color: "from-red-950/80",
+    accentColor: "#ef4444",
+    icon: "BSc",
+  },
+  {
+    title: "CCNAv7: Enterprise Networking, Security, and Automation",
+    issuer: "SLIIT City UNI · Cisco Networking Academy",
+    issuerShort: "SLIIT / Cisco",
+    date: "Mar 2023 – Nov 2023",
+    grade: "Grade: Merit",
+    category: "Enterprise Networking",
+    skills: "Enterprise Networking, Cybersecurity, LAN/WAN Management",
+    color: "from-blue-950/80",
+    accentColor: "#00b4d8",
+    icon: "CCNA",
+  },
+  {
+    title: "CCNAv7: Switching, Routing, and Wireless Essentials",
+    issuer: "SLIIT City UNI · Cisco Networking Academy",
+    issuerShort: "SLIIT / Cisco",
+    date: "Nov 2022 – Mar 2023",
+    grade: "Grade: Merit",
+    category: "Network Infrastructure",
+    skills: "Network Switches, Routing Protocols, Wireless Essentials",
+    color: "from-cyan-950/80",
+    accentColor: "#06b6d4",
+    icon: "CCNA",
+  },
+  {
+    title: "CCNAv7: Introduction to Networks",
+    issuer: "SLIIT City UNI · Cisco Networking Academy",
+    issuerShort: "SLIIT / Cisco",
+    date: "Mar 2022 – Nov 2022",
+    grade: "Grade: Merit",
+    category: "Computer Networking",
+    skills: "Network Topologies, Subnetting, IP Addressing, Ethernet",
+    color: "from-indigo-950/80",
+    accentColor: "#6366f1",
+    icon: "CCNA",
   },
   {
     title: "Diploma in Network Engineering with Security",
-    issuer: "SLIIT",
-    issuerShort: "SLIIT",
-    date: "2023",
-    color: "from-blue-950/80",
-    accentColor: "#0C4A6E",
-    icon: "S",
+    issuer: "NextGen Campus",
+    issuerShort: "NextGen",
+    date: "Apr 2021 – Oct 2021",
+    grade: "Diploma",
+    category: "Network Security",
+    skills: "Network Engineering, Infrastructure Security, Firewalls",
+    color: "from-emerald-950/80",
+    accentColor: "#10b981",
+    icon: "DNE",
   },
   {
-    title: "HackerRank Problem Solving (Intermediate)",
-    issuer: "HackerRank",
-    issuerShort: "HackerRank",
-    date: "2024",
-    verifyUrl: "https://www.hackerrank.com/certificates/",
-    color: "from-green-900/80",
-    accentColor: "#2EC866",
-    icon: "H",
+    title: "Certification in Cyber Security & Networking",
+    issuer: "NextGen Campus",
+    issuerShort: "NextGen",
+    date: "Feb 2021 – Jun 2021",
+    grade: "Certified",
+    category: "Cybersecurity",
+    skills: "Cybersecurity Fundamentals, Network Defense, Threat Analysis",
+    color: "from-amber-950/80",
+    accentColor: "#f59e0b",
+    icon: "SEC",
   },
   {
-    title: "Postman Student Expert",
-    issuer: "Postman",
-    issuerShort: "Postman",
-    date: "2024",
-    verifyUrl: "https://badgr.com/public/assertions/",
-    color: "from-orange-900/80",
-    accentColor: "#FF6C37",
-    icon: "P",
-  },
-  {
-    title: "React - The Complete Guide",
-    issuer: "Udemy",
-    issuerShort: "Udemy",
-    date: "2024",
-    color: "from-purple-900/80",
-    accentColor: "#A435F0",
-    icon: "R",
-  },
-  {
-    title: "JavaScript Algorithms & Data Structures",
-    issuer: "freeCodeCamp",
-    issuerShort: "fCC",
-    date: "2023",
-    verifyUrl: "https://www.freecodecamp.org/certification/",
-    color: "from-yellow-900/80",
-    accentColor: "#FECA57",
-    icon: "JS",
-  },
-  {
-    title: "Foundations of Google Cloud",
-    issuer: "Google Cloud",
-    issuerShort: "Google",
-    date: "2024",
-    color: "from-blue-900/80",
-    accentColor: "#4285F4",
-    icon: "G",
-  },
-  {
-    title: "BSc (Hons) Software Engineering",
-    issuer: "NSBM Green University · Plymouth University (UK)",
-    issuerShort: "NSBM / Plymouth",
-    date: "Graduated (2026)",
-    color: "from-red-900/80",
-    accentColor: "#ef4444",
-    icon: "BSc",
+    title: "G.C.E. Advanced Level (A/L) — Engineering Technology",
+    issuer: "D. S. Senanayake College",
+    issuerShort: "DSSC",
+    date: "2009 – 2022",
+    grade: "Technology Stream",
+    category: "Secondary Education",
+    skills: "Engineering Technology, Science for Technology, General ICT",
+    color: "from-stone-900/80",
+    accentColor: "#d4af37",
+    icon: "A/L",
   },
 ];
 
@@ -171,12 +182,12 @@ export default function Certificates() {
         {/* Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
           {certificates.map((cert, idx) => (
             <motion.div
               key={idx}
-              className="group relative rounded-2xl border border-white/5 overflow-hidden backdrop-blur-sm"
+              className="group relative rounded-2xl border border-white/5 overflow-hidden backdrop-blur-sm flex flex-col justify-between"
               style={{ background: "rgba(26,15,14,0.6)" }}
               whileHover={{
                 y: -6,
@@ -191,49 +202,57 @@ export default function Certificates() {
                 style={{ background: `linear-gradient(to right, ${cert.accentColor}80, transparent)` }}
               />
 
-              <div className="p-6 flex flex-col gap-4">
-                {/* Icon / letter mark */}
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black"
-                  style={{
-                    background: `${cert.accentColor}18`,
-                    color: cert.accentColor,
-                    border: `1px solid ${cert.accentColor}30`,
-                  }}
-                >
-                  {cert.icon}
+              <div className="p-6 flex flex-col gap-3.5 flex-1">
+                {/* Header: Icon + Grade Badge */}
+                <div className="flex items-center justify-between gap-2">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black shrink-0"
+                    style={{
+                      background: `${cert.accentColor}18`,
+                      color: cert.accentColor,
+                      border: `1px solid ${cert.accentColor}30`,
+                    }}
+                  >
+                    {cert.icon}
+                  </div>
+
+                  {cert.grade && (
+                    <span
+                      className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full border truncate"
+                      style={{
+                        color: cert.accentColor,
+                        borderColor: `${cert.accentColor}40`,
+                        background: `${cert.accentColor}12`,
+                      }}
+                    >
+                      {cert.grade}
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-1 flex-1">
-                  <h3 className="text-sm font-semibold text-foreground leading-tight group-hover:text-white transition-colors duration-300">
+                  <h3 className="text-sm font-semibold text-foreground leading-snug group-hover:text-white transition-colors duration-300">
                     {cert.title}
                   </h3>
-                  <p className="text-xs text-foreground/50 font-light">
+                  <p className="text-xs text-foreground/60 font-light">
                     {cert.issuer}
                   </p>
+                  {cert.skills && (
+                    <p className="text-[11px] text-foreground/45 font-mono mt-1.5 line-clamp-2">
+                      {cert.skills}
+                    </p>
+                  )}
                 </div>
 
-                {/* Footer: date + verify link */}
+                {/* Footer: date + category */}
                 <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
                   <span className="text-xs font-mono text-foreground/40">
                     {cert.date}
                   </span>
-                  {cert.verifyUrl && (
-                    <motion.a
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[10px] font-mono tracking-widest uppercase px-2 py-1 rounded border transition-all duration-200"
-                      style={{
-                        color: cert.accentColor,
-                        borderColor: `${cert.accentColor}40`,
-                      }}
-                      whileHover={{
-                        backgroundColor: `${cert.accentColor}15`,
-                      }}
-                    >
-                      Verify ↗
-                    </motion.a>
+                  {cert.category && (
+                    <span className="text-[10px] font-mono text-foreground/40 uppercase tracking-wider">
+                      {cert.category}
+                    </span>
                   )}
                 </div>
               </div>
