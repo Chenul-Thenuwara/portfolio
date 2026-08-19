@@ -130,25 +130,25 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto"
         >
           <a
             href="#projects"
-            className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-foreground text-[var(--background)] hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_25px_rgba(230,224,212,0.2)]"
+            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-foreground text-[var(--background)] hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_25px_rgba(230,224,212,0.2)]"
           >
             Explore Projects
           </a>
           <a
             href="#experience"
-            className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-white/5 border border-white/15 text-foreground hover:bg-white/10 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
+            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-white/5 border border-white/15 text-foreground hover:bg-white/10 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
           >
-            Experience &amp; Career
+            Experience
           </a>
           <a
             href="#certificates"
-            className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-walnut/30 border border-walnut-light/40 text-foreground/90 hover:bg-walnut/50 transition-all duration-300 backdrop-blur-sm"
+            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-walnut/30 border border-walnut-light/40 text-foreground/90 hover:bg-walnut/50 transition-all duration-300 backdrop-blur-sm"
           >
-            Credentials &amp; Certifications
+            Credentials
           </a>
         </motion.div>
         {/* Scroll indicator */}
