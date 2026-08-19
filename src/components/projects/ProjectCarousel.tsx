@@ -46,8 +46,13 @@ const projects: ProjectItem[] = [
     tech: ["Node.js", "Express.js", "React", "Electron", "LAN Streaming", "Local Storage", "REST APIs", "Tailwind CSS"],
     color: "from-blue-950 to-[#0a0a0a]",
     accentColor: "#3b82f6",
-    coverImage: "/images/projects/media-server-discover.png",
+    coverImage: "/images/projects/media-server-main.png",
     gallery: [
+      {
+        src: "/images/projects/media-server-main.png",
+        title: "Welcome & Auth Portal",
+        description: "Landing showcase featuring collection metrics, local server connection status, and user sign-in.",
+      },
       {
         src: "/images/projects/media-server-discover.png",
         title: "Media Discovery & Library Hub",
@@ -72,11 +77,6 @@ const projects: ProjectItem[] = [
         src: "/images/projects/media-server-search.png",
         title: "Real-time Search & Filter Engine",
         description: "Multi-parameter filter supporting genre, release year, IMDb ratings, and library queries.",
-      },
-      {
-        src: "/images/projects/media-server-main.png",
-        title: "Welcome & Auth Portal",
-        description: "Landing showcase featuring collection metrics, local server connection status, and user sign-in.",
       },
     ],
   },
