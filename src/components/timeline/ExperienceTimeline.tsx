@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface TimelineEntry {
   role: string;
   organization: string;
-  category: "Experience" | "Education" | "Community";
+  category: "Experience" | "Education";
   date: string;
   active: boolean;
   description: string;
@@ -37,16 +37,6 @@ const timelineData: TimelineEntry[] = [
     description:
       "Completed final undergraduate group presentation and graduated with honors. Built the self-hosted local media server as final year engineering project.",
     tags: ["Degree Completed", "Final Year Project", "Distributed Systems", "Software Architecture"],
-  },
-  {
-    role: "Community Participant",
-    organization: "Microsoft Learn Student Ambassadors (MLSA) Sri Lanka",
-    category: "Community",
-    date: "February 2026",
-    active: false,
-    description:
-      "Active participant in the MLSA Sri Lanka tech community summit, engaging in sessions on cloud computing, modern developer ecosystems, and student innovation.",
-    tags: ["Cloud Tech", "Community", "Developer Ecosystem"],
   },
   {
     role: "Full Stack Developer",
