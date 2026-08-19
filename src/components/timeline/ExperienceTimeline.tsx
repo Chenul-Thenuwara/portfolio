@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
+
+interface TimelineImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
 
 interface TimelineEntry {
   role: string;
@@ -17,6 +24,7 @@ interface TimelineEntry {
   active: boolean;
   bullets: string[];
   tags: string[];
+  images?: TimelineImage[];
 }
 
 const timelineData: TimelineEntry[] = [
@@ -65,6 +73,13 @@ const timelineData: TimelineEntry[] = [
       "Volunteer (Aug 2023 – Jan 2026): Contributed to large-scale tech community events, hackathons, and Linux/FOSS enablement sessions.",
     ],
     tags: ["FOSS Community", "Leadership", "Open Source Advocacy", "Digital Marketing", "Team Management"],
+    images: [
+      {
+        src: "/images/foss-agm-2025.jpg",
+        alt: "FOSS Community NSBM AGM 2025 Group Photo",
+        caption: "FOSS Community NSBM — Annual General Meeting (AGM '25)",
+      },
+    ],
   },
   {
     role: "BSc (Hons) in Software Engineering",
@@ -230,6 +245,35 @@ export default function ExperienceTimeline() {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Attached Media / Photos */}
+                  {item.images && item.images.length > 0 && (
+                    <div className="mt-4 flex flex-col gap-2">
+                      <div className="grid grid-cols-1 gap-2">
+                        {item.images.map((img, imgIdx) => (
+                          <div
+                            key={imgIdx}
+                            className="group/img relative rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black/40 aspect-[16/9]"
+                          >
+                            <Image
+                              src={img.src}
+                              alt={img.alt}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 500px"
+                              className="object-cover group-hover/img:scale-105 transition duration-500"
+                            />
+                            {img.caption && (
+                              <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-center justify-between">
+                                <span className="text-[10px] font-mono text-foreground/80 tracking-wide">
+                                  {img.caption}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-1.5 mt-5 pt-3 border-t border-white/5">
