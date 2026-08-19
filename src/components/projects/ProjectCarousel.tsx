@@ -390,7 +390,7 @@ export default function ProjectCarousel() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl h-auto max-h-[88vh] bg-[#140e0d] border border-white/15 rounded-3xl shadow-2xl overflow-y-auto z-10 text-foreground flex flex-col scrollbar-thin scrollbar-thumb-white/10 overscroll-contain"
+              className="relative w-full max-w-5xl h-auto max-h-[88vh] bg-[#140e0d] border border-white/15 rounded-3xl shadow-2xl overflow-y-auto no-scrollbar z-10 text-foreground flex flex-col overscroll-contain"
               data-lenis-prevent="true"
               onWheel={(e) => {
                 e.stopPropagation();
