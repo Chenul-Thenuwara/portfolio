@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, ExternalLink, Sparkles, Layers, Terminal, CheckCircle2 } from "lucide-react";
 import KineticTitle from "./KineticTitle";
+import { useLenis } from "@/components/providers/SmoothScrollProvider";
 
 interface ProjectGalleryItem {
   src: string;
@@ -135,10 +136,27 @@ const projects: ProjectItem[] = [
 
 export default function ProjectCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { getLenis } = useLenis();
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Lock background scroll and pause Lenis when modal is open
+  useEffect(() => {
+    const lenis = getLenis();
+    if (activeProject) {
+      document.body.style.overflow = "hidden";
+      if (lenis) lenis.stop();
+    } else {
+      document.body.style.overflow = "";
+      if (lenis) lenis.start();
+    }
+    return () => {
+      document.body.style.overflow = "";
+      if (lenis) lenis.start();
+    };
+  }, [activeProject, getLenis]);
 
   // Check scroll position for navigation arrows
   const checkScroll = () => {
@@ -352,7 +370,10 @@ export default function ProjectCarousel() {
       {/* ── Detailed Project Modal ── */}
       <AnimatePresence>
         {activeProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 overflow-hidden"
+            data-lenis-prevent="true"
+          >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -360,6 +381,7 @@ export default function ProjectCarousel() {
               exit={{ opacity: 0 }}
               onClick={() => setActiveProject(null)}
               className="fixed inset-0 bg-black/85 backdrop-blur-md"
+              data-lenis-prevent="true"
             />
 
             {/* Modal Dialog */}
@@ -368,7 +390,11 @@ export default function ProjectCarousel() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-[#140e0d] border border-white/15 rounded-3xl shadow-2xl overflow-y-auto z-10 text-foreground flex flex-col scrollbar-thin scrollbar-thumb-white/10"
+              className="relative w-full max-w-5xl h-auto max-h-[88vh] bg-[#140e0d] border border-white/15 rounded-3xl shadow-2xl overflow-y-auto z-10 text-foreground flex flex-col scrollbar-thin scrollbar-thumb-white/10 overscroll-contain"
+              data-lenis-prevent="true"
+              onWheel={(e) => {
+                e.stopPropagation();
+              }}
             >
               {/* Header bar */}
               <div className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-8 py-5 bg-[#140e0d]/95 backdrop-blur-md border-b border-white/10">
