@@ -10,43 +10,60 @@ gsap.registerPlugin(ScrollTrigger);
 interface TimelineEntry {
   role: string;
   organization: string;
+  employmentType?: string;
   category: "Experience" | "Education";
   date: string;
+  location: string;
   active: boolean;
-  description: string;
+  bullets: string[];
   tags: string[];
 }
 
 const timelineData: TimelineEntry[] = [
   {
-    role: "Full-Stack Developer Intern",
+    role: "Information Technology Intern",
     organization: "Anunine Holdings",
+    employmentType: "Full-time",
     category: "Experience",
-    date: "April 2026 – Present",
+    date: "Mar 2026 – Present",
+    location: "Dehiwala, Western Province, Sri Lanka · On-site",
     active: true,
-    description:
-      "End-to-end full-stack software development, production feature integration, internal tooling, and daily sprint delivery within enterprise engineering workflows.",
-    tags: ["Full-Stack", "Feature Integration", "Internal Tools", "Agile Sprints"],
+    bullets: [
+      "Architected a multi-tenant Enterprise IT Asset Management & Service Desk Portal using Next.js 16 and React 19.",
+      "Developed a business-hours SLA calculation engine in TypeScript, automating IT vendor billing reminders.",
+      "Implemented Role-Based Access Control (RBAC) across five distinct role portals, enhancing security and workflow efficiency.",
+      "Provided tier-2 software systems support, ensuring optimal operational uptime across departments.",
+    ],
+    tags: ["Next.js 16", "React 19", "TypeScript", "RBAC", "Enterprise Portals", "Tier-2 Support"],
+  },
+  {
+    role: "Full Stack Software Engineering Intern",
+    organization: "Algoarts",
+    employmentType: "Internship",
+    category: "Experience",
+    date: "Sep 2025 – Feb 2026 · 6 mos",
+    location: "Sri Lanka · Remote",
+    active: false,
+    bullets: [
+      "Developed cross-platform enterprise systems and point-of-sale applications using Next.js, Electron, Node.js, and MongoDB.",
+      "Architected Ryzenor ERP, enhancing business operations with automated payroll and inventory tracking.",
+      "Created a commercial travel platform featuring a custom tour wizard and integrated SEO capabilities.",
+    ],
+    tags: ["Next.js", "Electron", "Node.js", "MongoDB", "ERP Architecture", "TypeScript"],
   },
   {
     role: "BSc (Hons) in Software Engineering",
     organization: "NSBM Green University · Plymouth University (UK)",
+    employmentType: "Undergraduate Degree",
     category: "Education",
     date: "Graduated · April 2026",
+    location: "Homagama, Sri Lanka",
     active: false,
-    description:
-      "Completed final undergraduate group presentation and graduated with honors. Built the self-hosted local media server as final year engineering project.",
+    bullets: [
+      "Completed final undergraduate group presentation and graduated with honors.",
+      "Built the self-hosted local media library streaming server as the official final-year engineering project.",
+    ],
     tags: ["Degree Completed", "Final Year Project", "Distributed Systems", "Software Architecture"],
-  },
-  {
-    role: "Full Stack Developer",
-    organization: "Algoarts",
-    category: "Experience",
-    date: "Aug 2025 – Feb 2026",
-    active: false,
-    description:
-      "Engineered responsive full-stack applications, interactive UI components, and API integration layers using React, TypeScript, and Node.js.",
-    tags: ["React", "TypeScript", "Node.js", "API Design"],
   },
 ];
 
@@ -112,11 +129,11 @@ export default function ExperienceTimeline() {
           Experience &amp; Education
         </h2>
         <p className="text-foreground/50 font-light text-base mt-4">
-          Professional industry delivery, academic graduation, and active tech community engagement.
+          Professional industry delivery, enterprise system architecture, and academic graduation.
         </p>
       </div>
 
-      <div className="relative w-full max-w-4xl mx-auto flex flex-col z-10">
+      <div className="relative w-full max-w-5xl mx-auto flex flex-col z-10">
         {/* Background track line */}
         <div className="hidden md:block absolute left-1/2 -ml-[1px] w-[2px] h-full bg-white/10" />
 
@@ -150,16 +167,12 @@ export default function ExperienceTimeline() {
 
               {/* Content Card */}
               <div
-                className={`w-full md:w-[46%] flex flex-col ${
-                  isEven ? "md:items-start md:text-left" : "md:items-end md:text-right"
+                className={`w-full md:w-[47%] flex flex-col ${
+                  isEven ? "md:items-start md:text-left" : "md:items-end md:text-left"
                 }`}
               >
                 <div className="w-full bg-[rgba(26,20,19,0.7)] backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5 shadow-2xl hover:border-walnut-light/30 transition-all duration-300 group">
-                  <div
-                    className={`flex flex-wrap items-center gap-2 mb-3 ${
-                      isEven ? "md:justify-start" : "md:justify-end"
-                    }`}
-                  >
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <span className="text-walnut-light text-xs font-mono tracking-widest font-semibold">
                       {item.date}
                     </span>
@@ -168,11 +181,7 @@ export default function ExperienceTimeline() {
                     </span>
                   </div>
 
-                  <h3
-                    className={`text-xl sm:text-2xl font-bold text-foreground flex flex-wrap items-center gap-3 ${
-                      isEven ? "md:justify-start" : "md:justify-end"
-                    }`}
-                  >
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground flex flex-wrap items-center gap-3">
                     <span>{item.role}</span>
                     {item.active && (
                       <span className="relative flex h-2.5 w-2.5">
@@ -182,20 +191,33 @@ export default function ExperienceTimeline() {
                     )}
                   </h3>
 
-                  <p className="text-walnut-light/90 text-sm sm:text-base mt-1 font-medium">
-                    {item.organization}
+                  <div className="flex flex-wrap items-center gap-2 mt-1">
+                    <span className="text-foreground/90 text-sm font-semibold">
+                      {item.organization}
+                    </span>
+                    {item.employmentType && (
+                      <span className="text-xs font-mono text-foreground/40">
+                        · {item.employmentType}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-xs font-mono text-walnut-light/80 mt-1 mb-4">
+                    📍 {item.location}
                   </p>
 
-                  <p className="text-foreground/70 text-sm mt-3 font-light leading-relaxed">
-                    {item.description}
-                  </p>
+                  {/* Bullet points */}
+                  <ul className="space-y-2 mt-3 text-foreground/75 text-xs sm:text-sm font-light leading-relaxed">
+                    {item.bullets.map((bullet, bIdx) => (
+                      <li key={bIdx} className="flex items-start gap-2">
+                        <span className="text-walnut-light text-xs mt-1 shrink-0">•</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
 
                   {/* Tags */}
-                  <div
-                    className={`flex flex-wrap gap-1.5 mt-4 ${
-                      isEven ? "md:justify-start" : "md:justify-end"
-                    }`}
-                  >
+                  <div className="flex flex-wrap gap-1.5 mt-5 pt-3 border-t border-white/5">
                     {item.tags.map((t) => (
                       <span
                         key={t}
@@ -209,7 +231,7 @@ export default function ExperienceTimeline() {
               </div>
 
               {/* Spacer on opposite side */}
-              <div className="hidden md:block w-[46%]" />
+              <div className="hidden md:block w-[47%]" />
             </div>
           );
         })}
