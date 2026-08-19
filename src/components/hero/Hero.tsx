@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import HeroBackgroundCanvas from "./HeroBackgroundCanvas";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,26 +53,20 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--deep-dark)] py-28"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--deep-dark)] py-28 cursor-default"
     >
-      {/* ── 1. Interactive Mouse Spotlight Glow ── */}
+      {/* ── 1. Interactive Physics Particle & Constellation Canvas ── */}
+      <HeroBackgroundCanvas />
+
+      {/* ── 2. Interactive Mouse Spotlight Glow ── */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
         style={{
           background: useTransform(
             [smoothX, smoothY],
             ([x, y]) =>
-              `radial-gradient(800px circle at ${x}px ${y}px, rgba(93, 64, 55, 0.28), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
+              `radial-gradient(800px circle at ${x}px ${y}px, rgba(93, 64, 55, 0.25), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
           ),
-        }}
-      />
-
-      {/* ── 2. Subtle Architectural Dot-Grid Background ── */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage: `radial-gradient(rgba(230, 224, 212, 0.22) 1px, transparent 1px)`,
-          backgroundSize: "36px 36px",
         }}
       />
 
@@ -105,7 +100,7 @@ export default function Hero() {
         className="pointer-events-none absolute bottom-1/4 -right-32 w-[620px] h-[620px] bg-blue-900/15 rounded-full blur-[150px]"
       />
 
-      {/* ── 4. Side Engineering Telemetry & Accents (Fills Empty Margins) ── */}
+      {/* ── 4. Side Engineering Telemetry & Accents ── */}
       {/* Left side telemetry */}
       <div className="pointer-events-none absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-6 text-[10px] font-mono tracking-widest text-foreground/25 select-none z-10">
         <div className="flex items-center gap-2">
@@ -129,6 +124,69 @@ export default function Hero() {
           ENTERPRISE ARCHITECTURE
         </span>
       </div>
+
+      {/* ── 5. Interactive Floating Glass Tech Badges on Sides (Desktop) ── */}
+      {/* Left Floating Glass Card */}
+      <motion.div
+        style={{ x: leftOrbX, y: leftOrbY }}
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.7 }}
+        whileHover={{ scale: 1.06, y: -6 }}
+        className="pointer-events-auto absolute left-6 2xl:left-14 top-1/3 hidden lg:flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-2xl z-20 cursor-pointer group hover:border-walnut-light/60 hover:bg-white/[0.07] transition-all duration-300 max-w-[230px]"
+      >
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm shrink-0">
+            🏢
+          </div>
+          <div>
+            <div className="text-xs font-bold text-white group-hover:text-walnut-light transition-colors">
+              Anunine Group
+            </div>
+            <div className="text-[10px] font-mono text-foreground/60">
+              10 Subsidiaries Hub
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-foreground/50">
+          <span>Enterprise Architecture</span>
+          <span className="flex items-center gap-1 text-emerald-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Live
+          </span>
+        </div>
+      </motion.div>
+
+      {/* Right Floating Glass Card */}
+      <motion.div
+        style={{ x: rightOrbX, y: rightOrbY }}
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        whileHover={{ scale: 1.06, y: -6 }}
+        className="pointer-events-auto absolute right-6 2xl:right-14 top-1/3 hidden lg:flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-2xl z-20 cursor-pointer group hover:border-blue-500/60 hover:bg-white/[0.07] transition-all duration-300 max-w-[230px]"
+      >
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-sm shrink-0">
+            🎬
+          </div>
+          <div>
+            <div className="text-xs font-bold text-white group-hover:text-blue-400 transition-colors">
+              Cineora Media Hub
+            </div>
+            <div className="text-[10px] font-mono text-foreground/60">
+              LAN 4K Ultra Streaming
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-foreground/50">
+          <span>Zero Cloud Latency</span>
+          <span className="flex items-center gap-1 text-blue-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            Active
+          </span>
+        </div>
+      </motion.div>
 
       {/* Content */}
       <motion.div
