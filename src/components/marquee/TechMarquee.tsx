@@ -3,15 +3,19 @@
 import { motion } from "framer-motion";
 
 const techs = [
+  "React.js",
   "Next.js",
-  "React",
-  "C# .NET",
-  "Flutter",
-  "Firebase",
+  "TypeScript",
+  "JavaScript ES6+",
+  "Electron",
+  "Node.js",
+  "Express.js",
+  "MongoDB",
   "MERN Stack",
   "Tailwind CSS",
-  "GSAP",
-  "Framer Motion",
+  "REST APIs",
+  "Local Streaming",
+  "Git & GitHub",
 ];
 
 export default function TechMarquee() {

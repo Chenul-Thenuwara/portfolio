@@ -88,13 +88,13 @@ const certificates: Certificate[] = [
     icon: "G",
   },
   {
-    title: "BSc (Hons) Software Engineering (Plymouth)",
-    issuer: "University of Plymouth",
-    issuerShort: "Plymouth",
-    date: "In Progress",
+    title: "BSc (Hons) Software Engineering",
+    issuer: "NSBM Green University · Plymouth University (UK)",
+    issuerShort: "NSBM / Plymouth",
+    date: "Graduated (2026)",
     color: "from-red-900/80",
-    accentColor: "#D11141",
-    icon: "P",
+    accentColor: "#ef4444",
+    icon: "BSc",
   },
 ];
 
@@ -141,6 +141,7 @@ export default function Certificates() {
 
   return (
     <section
+      id="certificates"
       ref={sectionRef}
       className="relative w-full py-32 px-6 bg-[var(--background)] overflow-hidden"
     >

@@ -50,29 +50,86 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex flex-col items-center justify-center text-center px-6"
+        className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-5xl"
       >
+        {/* Status Badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
+          className="flex flex-wrap items-center justify-center gap-3 mb-6"
+        >
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider bg-walnut/40 text-foreground/90 border border-walnut-light/30 backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Full-Stack Developer Intern @ Anunine Holdings
+          </span>
+
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono tracking-wider bg-white/5 text-foreground/70 border border-white/10 backdrop-blur-md">
+            📍 Sri Lanka
+          </span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-foreground mb-6"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4"
         >
-          Chenul Dulmika <br className="hidden md:block" />
+          Chenul Dulmika <br className="hidden sm:block" />
           Thenuwara
         </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+          className="text-xl sm:text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#e6e0d4] via-[#d7ccc8] to-[#a1887f] mb-4"
+        >
+          Full-Stack Software Developer
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
-          className="text-lg md:text-xl text-foreground/70 font-light max-w-2xl"
+          transition={{ duration: 1, delay: 0.45, ease: [0.215, 0.61, 0.355, 1] }}
+          className="text-base sm:text-lg text-foreground/75 font-light max-w-2xl leading-relaxed mb-8"
         >
-          BSc (Hons) Software Engineering Undergraduate at
-          <span className="text-walnut-light font-medium ml-1">
-            NSBM Green University
-          </span>
+          BSc (Hons) Software Engineering Graduate from{" "}
+          <span className="text-walnut-light font-medium">NSBM Green University</span>{" "}
+          in partnership with{" "}
+          <span className="text-foreground font-medium">Plymouth University (UK)</span>.
+          Specializing in scalable web ecosystems, cross-platform desktop software, and local-network streaming architectures.
         </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
+          <a
+            href="#projects"
+            className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-foreground text-[var(--background)] hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_25px_rgba(230,224,212,0.2)]"
+          >
+            Explore Projects
+          </a>
+          <a
+            href="#experience"
+            className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-white/5 border border-white/15 text-foreground hover:bg-white/10 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
+          >
+            Experience &amp; Journey
+          </a>
+          <a
+            href="#workspace"
+            className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-walnut/30 border border-walnut-light/40 text-foreground/90 hover:bg-walnut/50 transition-all duration-300 backdrop-blur-sm"
+          >
+            Developer Setup ⚡
+          </a>
+        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
@@ -80,12 +137,12 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
-        <span className="text-xs tracking-widest uppercase text-foreground/50">
+        <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-foreground/40">
           Scroll
         </span>
-        <div className="w-[1px] h-12 bg-foreground/20 overflow-hidden relative">
+        <div className="w-[1px] h-10 bg-foreground/20 overflow-hidden relative">
           <motion.div
             animate={{
               y: ["-100%", "100%"],

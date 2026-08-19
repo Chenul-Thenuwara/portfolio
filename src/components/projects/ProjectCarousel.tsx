@@ -15,39 +15,56 @@ const FluidImageCard = dynamic(
   { ssr: false }
 );
 
-const projects = [
-  {
-    title: "Easy Idama",
-    desc: "Sri Lankan real estate marketplace for land and property discovery.",
-    tech: ["Next.js", "Firebase", "Tailwind"],
-    color: "from-purple-950 to-[#0a0a0a]",
-    accentColor: "#7c3aed",
-    // Replace with real path once images are added: "/images/easy-idama.jpg"
-    textureSrc: "",
-  },
-  {
-    title: "StudyPlanner · Studee 2.0",
-    desc: "Cloud-synced desktop productivity suite built with C# .NET and Firebase.",
-    tech: ["C# .NET", "Firebase", "WPF"],
-    color: "from-indigo-950 to-[#0a0a0a]",
-    accentColor: "#4f46e5",
-    textureSrc: "",
-  },
+interface ProjectItem {
+  title: string;
+  role: string;
+  badge?: string;
+  desc: string;
+  tech: string[];
+  color: string;
+  accentColor: string;
+  textureSrc: string;
+}
+
+const projects: ProjectItem[] = [
   {
     title: "Self-Hosted Media Server",
+    role: "Lead Developer (Individual Project)",
     badge: "Final Year Project",
-    desc: "Privacy-focused personal streaming and file management solution.",
-    tech: ["Node.js", "FFmpeg", "React"],
+    desc: "Dedicated server-client streaming system engineered exclusively for local media libraries across a local area network (LAN), operating strictly without external streaming dependencies.",
+    tech: ["Node.js", "Express.js", "React", "Electron", "LAN Streaming", "Local Storage"],
     color: "from-blue-950 to-[#0a0a0a]",
-    accentColor: "#2563eb",
+    accentColor: "#3b82f6",
+    textureSrc: "",
+  },
+  {
+    title: "Enterprise IT Service & Asset Portal",
+    role: "Full-Stack Engineer",
+    badge: "Enterprise Platform",
+    desc: "Enterprise-grade web platform engineered for IT asset lifecycle management, hardware inventory tracking, and internal service management workflows.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "REST API", "Asset Management"],
+    color: "from-emerald-950 to-[#0a0a0a]",
+    accentColor: "#10b981",
     textureSrc: "",
   },
   {
     title: "My Flix",
-    desc: "Cinematic movie discovery and ticket reservation hub.",
-    tech: ["React", "TMDB API", "Stripe"],
+    role: "Full-Stack Collaborative Developer",
+    badge: "Collaborative Project",
+    desc: "Full-stack movie ticket booking and cinema reservation web application featuring interactive seat mapping, showtime scheduling, and MERN integration.",
+    tech: ["React", "TypeScript", "Node.js", "MongoDB", "MERN Stack"],
     color: "from-rose-950 to-[#0a0a0a]",
-    accentColor: "#e11d48",
+    accentColor: "#f43f5e",
+    textureSrc: "",
+  },
+  {
+    title: "StudyPlanner · Studee 2.0",
+    role: "Contributor & Maintainer",
+    badge: "Open Source",
+    desc: "Open-source digital study organizer and academic productivity tool engineered for student scheduling, assignment tracking, and structured study workflows.",
+    tech: ["C# .NET", "TypeScript", "React", "Desktop Apps", "Git"],
+    color: "from-purple-950 to-[#0a0a0a]",
+    accentColor: "#8b5cf6",
     textureSrc: "",
   },
 ];
@@ -82,6 +99,7 @@ export default function ProjectCarousel() {
 
   return (
     <section
+      id="projects"
       ref={containerRef}
       className="relative w-full h-screen bg-[var(--background)] overflow-hidden flex flex-col justify-center"
     >
@@ -141,14 +159,19 @@ export default function ProjectCarousel() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
 
             {/* Content overlay */}
-            <div className="absolute inset-0 p-8 flex flex-col justify-end z-10 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
-              {project.badge && (
-                <span className="self-start uppercase tracking-widest text-xs font-bold px-3 py-1 bg-walnut/80 text-foreground rounded-full mb-4 border border-walnut-light/30 backdrop-blur-md">
-                  {project.badge}
+            <div className="absolute inset-0 p-8 flex flex-col justify-end z-10 bg-gradient-to-t from-black/95 via-black/40 to-transparent">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                {project.badge && (
+                  <span className="uppercase tracking-widest text-[10px] font-bold px-3 py-1 bg-walnut/80 text-foreground rounded-full border border-walnut-light/30 backdrop-blur-md">
+                    {project.badge}
+                  </span>
+                )}
+                <span className="text-xs font-mono text-walnut-light/90 px-2 py-0.5 rounded bg-black/40 border border-white/5">
+                  {project.role}
                 </span>
-              )}
+              </div>
 
-              <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2 leading-tight">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 leading-tight">
                 {project.title}
               </h3>
 

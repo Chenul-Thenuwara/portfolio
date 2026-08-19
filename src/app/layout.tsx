@@ -16,9 +16,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chenul Dulmika Thenuwara | Portfolio",
+  title: "Chenul Dulmika Thenuwara | Full-Stack Software Developer",
   description:
-    "BSc (Hons) Software Engineering undergraduate at NSBM Green University. Full-stack developer specializing in React, Next.js, and C# .NET.",
+    "Full-Stack Software Developer & Software Engineering Graduate (NSBM Green University & Plymouth University). Specializing in React, Next.js, TypeScript, Node.js, Electron, and local streaming systems.",
+  keywords: [
+    "Chenul Dulmika Thenuwara",
+    "Full-Stack Developer",
+    "Software Engineer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Electron",
+    "Sri Lanka Developer",
+  ],
+  authors: [{ name: "Chenul Dulmika Thenuwara" }],
+  openGraph: {
+    title: "Chenul Dulmika Thenuwara | Full-Stack Software Developer",
+    description:
+      "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University (Plymouth University, UK). Explore projects, experience, and engineering workstation.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
