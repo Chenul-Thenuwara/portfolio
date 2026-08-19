@@ -151,31 +151,30 @@ export default function Hero() {
             Credentials &amp; Certifications
           </a>
         </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-      >
-        <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-foreground/40">
-          Scroll
-        </span>
-        <div className="w-[1px] h-10 bg-foreground/20 overflow-hidden relative">
-          <motion.div
-            animate={{
-              y: ["-100%", "100%"],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute top-0 left-0 w-full h-full bg-walnut-light"
-          />
-        </div>
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+          className="mt-14 flex flex-col items-center gap-2 pointer-events-none"
+        >
+          <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-foreground/40">
+            Scroll
+          </span>
+          <div className="w-[1px] h-10 bg-foreground/20 overflow-hidden relative">
+            <motion.div
+              animate={{
+                y: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute top-0 left-0 w-full h-full bg-walnut-light"
+            />
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );
