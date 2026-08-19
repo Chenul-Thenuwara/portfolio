@@ -35,7 +35,7 @@ const projects: ProjectItem[] = [
     tech: ["Node.js", "Express.js", "React", "Electron", "LAN Streaming", "Local Storage"],
     color: "from-blue-950 to-[#0a0a0a]",
     accentColor: "#3b82f6",
-    textureSrc: "",
+    textureSrc: "/images/projects/media-server-discover.png",
   },
   {
     title: "Enterprise IT Service & Asset Portal",
