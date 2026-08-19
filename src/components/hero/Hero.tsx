@@ -121,13 +121,13 @@ export default function Hero() {
             href="#experience"
             className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-white/5 border border-white/15 text-foreground hover:bg-white/10 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
           >
-            Experience &amp; Journey
+            Experience &amp; Career
           </a>
           <a
-            href="#workspace"
+            href="#certificates"
             className="px-6 py-3 rounded-full text-sm font-semibold tracking-wide bg-walnut/30 border border-walnut-light/40 text-foreground/90 hover:bg-walnut/50 transition-all duration-300 backdrop-blur-sm"
           >
-            Developer Setup ⚡
+            Credentials &amp; Certifications
           </a>
         </motion.div>
       </motion.div>

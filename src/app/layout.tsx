@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Chenul Dulmika Thenuwara | Full-Stack Software Developer",
     description:
-      "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University (Plymouth University, UK). Explore projects, experience, and engineering workstation.",
+      "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University (Plymouth University, UK). Explore featured projects, professional experience, technical stack, and verified credentials.",
     type: "website",
   },
 };

@@ -3,7 +3,6 @@ import Hero from "@/components/hero/Hero";
 import ExperienceTimeline from "@/components/timeline/ExperienceTimeline";
 import ProjectCarousel from "@/components/projects/ProjectCarousel";
 import TechMarquee from "@/components/marquee/TechMarquee";
-import AboutWorkspace from "@/components/about/AboutWorkspace";
 import Certificates from "@/components/certificates/Certificates";
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <ProjectCarousel />
       <TechMarquee />
       <ExperienceTimeline />
-      <AboutWorkspace />
       <Certificates />
 
       {/* Modern Footer */}
@@ -58,10 +56,10 @@ export default function Home() {
           </a>
           <span>•</span>
           <a
-            href="#workspace"
+            href="#certificates"
             className="hover:text-foreground underline decoration-walnut-light underline-offset-4 transition-colors"
           >
-            Setup
+            Credentials
           </a>
         </div>
 

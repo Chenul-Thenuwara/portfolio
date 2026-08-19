@@ -56,12 +56,6 @@ export default function Navbar() {
             Experience
           </a>
           <a
-            href="#workspace"
-            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 transition-colors"
-          >
-            Setup
-          </a>
-          <a
             href="#certificates"
             className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 transition-colors"
           >
