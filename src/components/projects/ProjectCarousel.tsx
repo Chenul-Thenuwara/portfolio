@@ -1,19 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import KineticTitle from "./KineticTitle";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// Load WebGL card only on client — no SSR (uses browser WebGL APIs)
-const FluidImageCard = dynamic(
-  () => import("@/components/webgl/FluidImageCard"),
-  { ssr: false }
-);
 
 interface ProjectItem {
   title: string;
@@ -45,7 +39,7 @@ const projects: ProjectItem[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "REST API", "Asset Management"],
     color: "from-emerald-950 to-[#0a0a0a]",
     accentColor: "#10b981",
-    textureSrc: "",
+    textureSrc: "/images/projects/enterprise-asset-portal.jpg",
   },
   {
     title: "My Flix",
@@ -55,7 +49,7 @@ const projects: ProjectItem[] = [
     tech: ["React", "TypeScript", "Node.js", "MongoDB", "MERN Stack"],
     color: "from-rose-950 to-[#0a0a0a]",
     accentColor: "#f43f5e",
-    textureSrc: "",
+    textureSrc: "/images/projects/my-flix.jpg",
   },
   {
     title: "StudyPlanner · Studee 2.0",
@@ -65,7 +59,7 @@ const projects: ProjectItem[] = [
     tech: ["C# .NET", "TypeScript", "React", "Desktop Apps", "Git"],
     color: "from-purple-950 to-[#0a0a0a]",
     accentColor: "#8b5cf6",
-    textureSrc: "",
+    textureSrc: "/images/projects/study-planner.jpg",
   },
 ];
 
@@ -113,101 +107,87 @@ export default function ProjectCarousel() {
         {projects.map((project, idx) => (
           <motion.div
             key={idx}
-            className="group relative w-[70vw] md:w-[45vw] lg:w-[35vw] aspect-[4/3] rounded-2xl cursor-pointer overflow-hidden shadow-2xl shrink-0 border border-white/5"
-            whileHover="hover"
+            className="group relative w-[70vw] md:w-[45vw] lg:w-[35vw] aspect-[4/3] rounded-2xl cursor-pointer overflow-hidden shadow-2xl shrink-0 border border-white/10 bg-[#120d0c]"
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.3 }}
           >
-            {/* ── WebGL Fluid Distortion Layer ── */}
-            {project.textureSrc ? (
-              <FluidImageCard
-                textureSrc={project.textureSrc}
-                fallbackColor={project.accentColor}
+            {/* Project Image Layer */}
+            <div className="absolute inset-0 overflow-hidden bg-black">
+              {project.textureSrc ? (
+                <Image
+                  src={project.textureSrc}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 70vw, (max-width: 1200px) 45vw, 35vw"
+                  className="object-cover object-top opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-out"
+                  priority={idx < 2}
+                />
+              ) : null}
+
+              {/* Gradient tint */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 mix-blend-overlay`}
               />
-            ) : (
-              /* Fallback gradient when no texture is provided yet */
-              <motion.div
-                className={`absolute inset-0 bg-gradient-to-br ${project.color}`}
-                variants={{ hover: { scale: 1.04 } }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {/* Noise texture overlay via CSS */}
-                <div
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    backgroundImage:
-                      "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
-                    backgroundSize: "200px 200px",
-                  }}
-                />
-                {/* Accent light bleed at top */}
-                <div
-                  className="absolute inset-0 opacity-40"
-                  style={{
-                    background: `radial-gradient(ellipse at 50% -10%, ${project.accentColor}50, transparent 65%)`,
-                  }}
-                />
-              </motion.div>
-            )}
 
-            {/* Cinematic overlay darkening */}
-            <motion.div
-              className="absolute inset-0 bg-black/50 mix-blend-multiply transition-all duration-500 ease-in-out"
-              variants={{ hover: { opacity: 0.2 } }}
-              initial={{ opacity: 1 }}
-            />
+              {/* Radial accent illumination */}
+              <div
+                className="absolute inset-0 opacity-40 pointer-events-none"
+                style={{
+                  background: `radial-gradient(ellipse at 50% 0%, ${project.accentColor}50, transparent 70%)`,
+                }}
+              />
+            </div>
 
-            {/* Vignette — always on */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
+            {/* Vignette */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
 
             {/* Content overlay */}
-            <div className="absolute inset-0 p-8 flex flex-col justify-end z-10 bg-gradient-to-t from-black/95 via-black/40 to-transparent">
+            <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end z-10 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 {project.badge && (
-                  <span className="uppercase tracking-widest text-[10px] font-bold px-3 py-1 bg-walnut/80 text-foreground rounded-full border border-walnut-light/30 backdrop-blur-md">
+                  <span
+                    className="uppercase tracking-widest text-[10px] font-bold px-3 py-1 rounded-full border backdrop-blur-md"
+                    style={{
+                      backgroundColor: `${project.accentColor}25`,
+                      borderColor: `${project.accentColor}60`,
+                      color: "#ffffff",
+                    }}
+                  >
                     {project.badge}
                   </span>
                 )}
-                <span className="text-xs font-mono text-walnut-light/90 px-2 py-0.5 rounded bg-black/40 border border-white/5">
+                <span className="text-xs font-mono text-white/90 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
                   {project.role}
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 leading-tight">
                 {project.title}
               </h3>
 
-              <p className="text-foreground/70 font-light text-base mb-4">
+              <p className="text-foreground/75 font-light text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
                 {project.desc}
               </p>
 
               {/* Tech stack pills */}
-              <motion.div
-                className="flex flex-wrap gap-2"
-                variants={{ hover: { opacity: 1, y: 0 } }}
-                initial={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.3, delay: 0.05 }}
-              >
+              <div className="flex flex-wrap gap-1.5">
                 {project.tech.map((t) => (
                   <span
                     key={t}
-                    className="text-[10px] font-mono tracking-widest px-2 py-1 rounded-full border border-white/10 text-foreground/60"
-                    style={{ background: `${project.accentColor}15` }}
+                    className="text-[10px] font-mono tracking-wider px-2.5 py-0.5 rounded-full border border-white/15 text-foreground/90 bg-white/10 backdrop-blur-sm"
                   >
                     {t}
                   </span>
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             {/* Accent border glow on hover */}
-            <motion.div
-              className="absolute inset-0 rounded-2xl pointer-events-none"
-              style={{ boxShadow: `inset 0 0 0 1px ${project.accentColor}00` }}
-              variants={{
-                hover: {
-                  boxShadow: `inset 0 0 0 1px ${project.accentColor}60, 0 0 40px -5px ${project.accentColor}40`,
-                },
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-500 group-hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)]"
+              style={{
+                boxShadow: `inset 0 0 0 1px ${project.accentColor}40`,
               }}
-              transition={{ duration: 0.4 }}
             />
           </motion.div>
         ))}
