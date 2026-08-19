@@ -1,51 +1,133 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Mouse position tracking with smooth spring physics
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 140 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // Parallax shifts for side ambient light orbs
+  const leftOrbX = useTransform(smoothX, [0, 1920], [-35, 35]);
+  const leftOrbY = useTransform(smoothY, [0, 1080], [-25, 25]);
+  const rightOrbX = useTransform(smoothX, [0, 1920], [35, -35]);
+  const rightOrbY = useTransform(smoothY, [0, 1080], [25, -25]);
+
+  // Scroll parallax for content
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "45%"]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+    };
+
+    const section = containerRef.current;
+    if (section) {
+      section.addEventListener("mousemove", handleMouseMove);
+    }
+    return () => {
+      if (section) {
+        section.removeEventListener("mousemove", handleMouseMove);
+      }
+    };
+  }, [mouseX, mouseY]);
 
   return (
     <section
       ref={containerRef}
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--deep-dark)] py-28"
     >
-      {/* Subtle Background Particles/Gradients */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-walnut/20 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-walnut-light/10 rounded-full blur-[150px]"
-        />
+      {/* ── 1. Interactive Mouse Spotlight Glow ── */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+        style={{
+          background: useTransform(
+            [smoothX, smoothY],
+            ([x, y]) =>
+              `radial-gradient(800px circle at ${x}px ${y}px, rgba(93, 64, 55, 0.28), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
+          ),
+        }}
+      />
+
+      {/* ── 2. Subtle Architectural Dot-Grid Background ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(rgba(230, 224, 212, 0.22) 1px, transparent 1px)`,
+          backgroundSize: "36px 36px",
+        }}
+      />
+
+      {/* ── 3. Atmospheric Side Glow Orbs with Parallax ── */}
+      <motion.div
+        style={{ x: leftOrbX, y: leftOrbY }}
+        animate={{
+          scale: [1, 1.12, 1],
+          opacity: [0.35, 0.55, 0.35],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="pointer-events-none absolute top-1/4 -left-32 w-[550px] h-[550px] bg-walnut/30 rounded-full blur-[130px]"
+      />
+
+      <motion.div
+        style={{ x: rightOrbX, y: rightOrbY }}
+        animate={{
+          scale: [1, 1.18, 1],
+          opacity: [0.25, 0.45, 0.25],
+        }}
+        transition={{
+          duration: 11,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+        className="pointer-events-none absolute bottom-1/4 -right-32 w-[620px] h-[620px] bg-blue-900/15 rounded-full blur-[150px]"
+      />
+
+      {/* ── 4. Side Engineering Telemetry & Accents (Fills Empty Margins) ── */}
+      {/* Left side telemetry */}
+      <div className="pointer-events-none absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-6 text-[10px] font-mono tracking-widest text-foreground/25 select-none z-10">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500/80 animate-ping" />
+          <span>PORTFOLIO // V2.6</span>
+        </div>
+        <div className="w-px h-28 bg-gradient-to-b from-white/10 via-walnut-light/40 to-transparent" />
+        <span className="rotate-90 origin-left translate-y-10 text-foreground/20">
+          LAT 6.9271° N · SRI LANKA
+        </span>
+      </div>
+
+      {/* Right side telemetry */}
+      <div className="pointer-events-none absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-end gap-6 text-[10px] font-mono tracking-widest text-foreground/25 select-none z-10">
+        <div className="flex items-center gap-2">
+          <span>NEXT 16 · REACT 19</span>
+          <span className="w-2 h-2 rounded-full bg-walnut-light/80" />
+        </div>
+        <div className="w-px h-28 bg-gradient-to-b from-white/10 via-blue-500/40 to-transparent" />
+        <span className="-rotate-90 origin-right translate-y-10 text-foreground/20">
+          ENTERPRISE ARCHITECTURE
+        </span>
       </div>
 
       {/* Content */}
