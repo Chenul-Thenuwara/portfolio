@@ -11,7 +11,7 @@ interface TimelineEntry {
   role: string;
   organization: string;
   employmentType?: string;
-  category: "Experience" | "Education";
+  category: "Experience" | "Education" | "Volunteering";
   date: string;
   location: string;
   active: boolean;
@@ -50,6 +50,21 @@ const timelineData: TimelineEntry[] = [
       "Created a commercial travel platform featuring a custom tour wizard and integrated SEO capabilities.",
     ],
     tags: ["Next.js", "Electron", "Node.js", "MongoDB", "ERP Architecture", "TypeScript"],
+  },
+  {
+    role: "Head of Social Media & Council Member",
+    organization: "FOSS Community - NSBM (Free & Open Source)",
+    employmentType: "Volunteer Leadership · 2 yrs 7 mos",
+    category: "Volunteering",
+    date: "Aug 2023 – Feb 2026",
+    location: "NSBM Green University, Sri Lanka",
+    active: false,
+    bullets: [
+      "Head of Social Media & Digital Marketing (Mar 2025 – Feb 2026): Spearheaded digital strategy, brand outreach, and campaign growth for open-source initiatives.",
+      "Council Member (Aug 2024 – Feb 2026): Managed core operations, guided technical workshops, and drove open-source advocacy across university batches.",
+      "Volunteer (Aug 2023 – Jan 2026): Contributed to large-scale tech community events, hackathons, and Linux/FOSS enablement sessions.",
+    ],
+    tags: ["FOSS Community", "Leadership", "Open Source Advocacy", "Digital Marketing", "Team Management"],
   },
   {
     role: "BSc (Hons) in Software Engineering",
@@ -126,10 +141,10 @@ export default function ExperienceTimeline() {
           ✦ Career &amp; Milestones
         </span>
         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
-          Experience &amp; Education
+          Experience &amp; Leadership
         </h2>
         <p className="text-foreground/50 font-light text-base mt-4">
-          Professional industry delivery, enterprise system architecture, and academic graduation.
+          Professional industry delivery, open-source community leadership, and academic graduation.
         </p>
       </div>
 
