@@ -125,68 +125,7 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* ── 5. Interactive Floating Glass Tech Badges on Sides (Desktop) ── */}
-      {/* Left Floating Glass Card */}
-      <motion.div
-        style={{ x: leftOrbX, y: leftOrbY }}
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.7 }}
-        whileHover={{ scale: 1.06, y: -6 }}
-        className="pointer-events-auto absolute left-6 2xl:left-14 top-1/3 hidden lg:flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-2xl z-20 cursor-pointer group hover:border-walnut-light/60 hover:bg-white/[0.07] transition-all duration-300 max-w-[230px]"
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm shrink-0">
-            🏢
-          </div>
-          <div>
-            <div className="text-xs font-bold text-white group-hover:text-walnut-light transition-colors">
-              Anunine Group
-            </div>
-            <div className="text-[10px] font-mono text-foreground/60">
-              10 Subsidiaries Hub
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-foreground/50">
-          <span>Enterprise Architecture</span>
-          <span className="flex items-center gap-1 text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Live
-          </span>
-        </div>
-      </motion.div>
 
-      {/* Right Floating Glass Card */}
-      <motion.div
-        style={{ x: rightOrbX, y: rightOrbY }}
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        whileHover={{ scale: 1.06, y: -6 }}
-        className="pointer-events-auto absolute right-6 2xl:right-14 top-1/3 hidden lg:flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-2xl z-20 cursor-pointer group hover:border-blue-500/60 hover:bg-white/[0.07] transition-all duration-300 max-w-[230px]"
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-sm shrink-0">
-            🎬
-          </div>
-          <div>
-            <div className="text-xs font-bold text-white group-hover:text-blue-400 transition-colors">
-              Cineora Media Hub
-            </div>
-            <div className="text-[10px] font-mono text-foreground/60">
-              LAN 4K Ultra Streaming
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-foreground/50">
-          <span>Zero Cloud Latency</span>
-          <span className="flex items-center gap-1 text-blue-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-            Active
-          </span>
-        </div>
-      </motion.div>
 
       {/* Content */}
       <motion.div
