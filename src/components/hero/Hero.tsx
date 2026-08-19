@@ -63,12 +63,12 @@ export default function Hero() {
           <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-walnut-light via-foreground/20 to-walnut blur-md opacity-60 group-hover:opacity-100 transition duration-500" />
           <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl bg-black">
             <Image
-              src="/images/headshot.jpg"
+              src="/images/profile.jpg"
               alt="Chenul Dulmika Thenuwara"
-              width={128}
-              height={128}
+              width={140}
+              height={140}
               priority
-              className="w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition duration-500"
+              className="w-full h-full object-cover object-[50%_18%] scale-105 group-hover:scale-110 transition duration-500"
             />
           </div>
         </motion.div>
