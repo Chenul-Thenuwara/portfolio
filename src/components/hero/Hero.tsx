@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Hero() {
@@ -16,7 +17,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--deep-dark)]"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--deep-dark)] py-28"
     >
       {/* Subtle Background Particles/Gradients */}
       <div className="absolute inset-0 z-0">
@@ -52,6 +53,26 @@ export default function Hero() {
         style={{ y, opacity }}
         className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-5xl"
       >
+        {/* Profile Avatar */}
+        <motion.div
+          initial={{ scale: 0.85, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.05, ease: [0.215, 0.61, 0.355, 1] }}
+          className="relative mb-5 group"
+        >
+          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-walnut-light via-foreground/20 to-walnut blur-md opacity-60 group-hover:opacity-100 transition duration-500" />
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl bg-black">
+            <Image
+              src="/images/headshot.jpg"
+              alt="Chenul Dulmika Thenuwara"
+              width={128}
+              height={128}
+              priority
+              className="w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition duration-500"
+            />
+          </div>
+        </motion.div>
+
         {/* Status Badges */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
