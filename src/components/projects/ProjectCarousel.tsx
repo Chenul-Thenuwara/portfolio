@@ -193,21 +193,175 @@ const projects: ProjectItem[] = [
   },
   {
     id: "enterprise-portal",
-    title: "Enterprise IT Service & Asset Portal",
-    role: "Full-Stack Engineer",
-    badge: "Enterprise Platform",
-    desc: "Enterprise-grade web platform engineered for IT asset lifecycle management, hardware inventory tracking, and internal service management workflows.",
+    title: "Enterprise Asset Management & IT Service Portal",
+    role: "Sole Full-Stack Developer & Architect",
+    badge: "Enterprise Platform · Anunine Holdings",
+    desc: "Comprehensive multi-tenant enterprise system engineered for resource allocation, 25+ hardware/software asset types, IT service desk ticketing, digital handover forms, IT billing oversight, and regional operations across 10 Anunine Group Subsidiaries.",
     longDesc:
-      "A comprehensive multi-tenant enterprise portal built to streamline IT operations across departments. Features end-to-end asset lifecycle tracking, automated SLA calculation engines, role-based access control (RBAC), and centralized service desk ticketing.",
+      "Solely designed, architected, and engineered this mission-critical enterprise platform from initial requirement analysis, UI/UX system design, database schemas, SLA engines, and RBAC governance to production deployment during internship at Anunine Holdings. Developed entirely as an individual engineer with no other developers, connecting 5 distinct role-based portals (Employee, HR, IT Engineering, SBU Regional Head, Super Admin) across 10 group subsidiaries with automated SLA engines, Google Chat webhooks, SMTP alerts, and digital asset handover workflows.",
     highlights: [
-      "Multi-tenant asset lifecycle management with automated depreciation and maintenance schedules.",
-      "Business-hours SLA engine in TypeScript automating vendor billing reminders and ticket escalation.",
-      "Granular Role-Based Access Control (RBAC) across 5 distinct departmental role portals.",
-      "Real-time analytics dashboard monitoring server health, hardware allocation, and support ticket queues.",
+      "100% Individual Full-Stack Execution: Single-handedly conducted requirement gathering, database schema architecture, UI/UX system design, SLA logic, and full-stack implementation.",
+      "Multi-Tenant Subsidiary Isolation: Engineered centralized management supporting independent tenant isolation across 10 Anunine Group subsidiaries (ANUN, ATLK, ATUK, ATUS, EPPL, KACC, EPML, KSPA, EAGL, RECY).",
+      "5 Distinct Role-Based Portals: Architected dedicated subsystems for Employees, HR, IT Engineering, SBU Regional Heads, and Super Admins connected via named Firestore instance 'anunine-sd'.",
+      "Automated SLA & Service Desk Engine: Custom business-hours SLA calculation in TypeScript automating ticket escalation, priority queues, and customer feedback.",
+      "Digital Asset Handover & Inventory: Comprehensive tracking across 25 device types with automated PDF handover documentation, physical signature verification, and CSV batch import/export.",
+      "IT Billing, Webhooks & Cron Automation: Automated vendor invoice oversight (LKR metrics), daily SMTP reminders (8:00 AM SLST), weekly Friday CSV digests, and Google Chat card alerts.",
     ],
-    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "REST API", "Asset Management", "RBAC"],
+    tech: [
+      "Next.js 16 (Turbopack)",
+      "React 19",
+      "TypeScript 5",
+      "Firebase Auth & Firestore",
+      "Firebase Admin SDK",
+      "Tailwind CSS v4",
+      "Framer Motion 12",
+      "Google Chat Webhooks",
+      "Nodemailer (SMTP)",
+      "Vercel Cron",
+      "Vitest 4",
+      "Multi-Tenancy",
+      "RBAC",
+    ],
     color: "from-emerald-950 to-[#0a0a0a]",
     accentColor: "#10b981",
+    coverImage: "/images/projects/enterprise/enterprise-01-login.png",
+    gallery: [
+      // 1. Auth & Self Service
+      {
+        src: "/images/projects/enterprise/enterprise-01-login.png",
+        title: "Enterprise Authentication & Multi-Tenant Login",
+        category: "Auth & Access",
+        description: "Secure multi-tenant login portal supporting custom Firebase Auth claims, role resolution (5 portals), and SBU isolation.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-02-reset-password.png",
+        title: "Account Security & Password Recovery",
+        category: "Auth & Access",
+        description: "Self-service password reset and security recovery workflow with automated token dispatch.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-03-self-service-ticket.png",
+        title: "Universal Service Desk Ticket Requisition",
+        category: "Self-Service",
+        description: "Cross-portal ticket submission wizard with priority levels, category classifications, and business justifications.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-04-self-service-asset-request.png",
+        title: "Hardware & Software Requisition Catalog",
+        category: "Self-Service",
+        description: "Standardized catalog requisition forms with automated multi-tier approval routing to HODs and SBU Admins.",
+      },
+
+      // 2. IT Engineering Command Center & Service Desk
+      {
+        src: "/images/projects/enterprise/enterprise-05-it-overview.png",
+        title: "IT Engineering Command Center",
+        category: "IT Portal · Overview",
+        description: "Centralized executive KPI dashboard summarizing service desk queues, active inventory counts, and pending fulfillment.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-06-it-kanban.png",
+        title: "Interactive Service Desk Kanban Board",
+        category: "IT Portal · Kanban",
+        description: "Real-time drag-and-drop task & ticket board with SLA indicators, priority badges, and quick assignee reassignment.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-07-it-ticket-detail.png",
+        title: "Support Ticket Deep-Dive & SLA Status",
+        category: "IT Portal · Tickets",
+        description: "Detailed ticket inspection dialog with automated SLA target countdown, activity history, and resolution notes.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-08-sla-policy-manual.png",
+        title: "Service Desk SLA Policy & Priority Rules",
+        category: "IT Portal · SLA",
+        description: "Configurable business-hours SLA engine definitions governing resolution targets (Critical, High, Medium, Low).",
+      },
+
+      // 3. Asset Provisioning, Inventory & Handover
+      {
+        src: "/images/projects/enterprise/enterprise-09-asset-fulfillment-queue.png",
+        title: "Asset Provisioning & Fulfillment Queue",
+        category: "IT Portal · Fulfillment",
+        description: "Restricted hardware and software fulfillment workflow executed exclusively by authorized IT Engineers.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-10-handover-document.png",
+        title: "Digital Asset Physical Handover & Sign-Off",
+        category: "IT Portal · Handover",
+        description: "Automated digital handover form generation with hardware verification checklists, employee signature verification, and PDF output.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-11-inventory-registry.png",
+        title: "Hardware & Device Inventory Registry",
+        category: "IT Portal · Inventory",
+        description: "Comprehensive asset tracking across 25 device types with status filters and one-click CSV batch import/export.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-12-add-inventory-item.png",
+        title: "New Asset Registration Wizard",
+        category: "IT Portal · Inventory",
+        description: "Granular asset tagging modal capturing make/model, serial numbers, department assignments, and warranty details.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-13-add-software-license.png",
+        title: "Software License & Compliance Form",
+        category: "IT Portal · Software",
+        description: "Digital license key registry, seat allocation, compliance tracking, and automated renewal reminder schedules.",
+      },
+
+      // 4. IT Billing, Invoices & Vendor Management
+      {
+        src: "/images/projects/enterprise/enterprise-14-billing-dashboard.png",
+        title: "IT Billing & Vendor Invoices Dashboard",
+        category: "IT Portal · Billing",
+        description: "Financial KPI cards tracking total pending, overdue, and due-today vendor invoices in Sri Lankan Rupees (LKR).",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-15-upload-invoice.png",
+        title: "Vendor Invoice Upload & Slip Verification",
+        category: "IT Portal · Billing",
+        description: "Invoice registration modal with PDF payment slip attachment and automated due-date reminder triggers.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-16-vendor-directory.png",
+        title: "SBU & Vendor Directory Settings",
+        category: "IT Portal · Vendors",
+        description: "Configurable vendor credit terms, agreed SLAs, and direct SBU Finance contact routing rules.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-17-add-vendor-form.png",
+        title: "New Vendor Onboarding & Credit Terms",
+        category: "IT Portal · Vendors",
+        description: "Vendor registration modal setting payment cycles, agreed credit terms, and direct escalation email channels.",
+      },
+
+      // 5. Performance, Personnel & Provisioning
+      {
+        src: "/images/projects/enterprise/enterprise-18-agent-performance.png",
+        title: "IT Agent Performance Analytics",
+        category: "IT Portal · Analytics",
+        description: "Real-time SLA compliance tracking, average resolution duration meters, and team throughput analytics.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-19-agent-breakdown.png",
+        title: "Personnel Workload & Resolution Breakdown",
+        category: "IT Portal · Analytics",
+        description: "Individual engineer ticket resolution metrics, customer ratings, and active workload queue distribution.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-20-personnel-management.png",
+        title: "IT Personnel & Access Management",
+        category: "IT Portal · Admin",
+        description: "Department technician directory, role assignment, custom claim synchronization, and SBU permission controls.",
+      },
+      {
+        src: "/images/projects/enterprise/enterprise-21-email-provisioning.png",
+        title: "Corporate Email & Identity Provisioning",
+        category: "IT Portal · Provisioning",
+        description: "Corporate Google Workspace / Microsoft 365 identity and mailbox provisioning tool for onboarded employees.",
+      },
+    ],
   },
   {
     id: "my-flix",
