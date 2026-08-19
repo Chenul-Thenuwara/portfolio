@@ -451,49 +451,56 @@ export default function ProjectCarousel() {
                     </div>
 
                     {/* Main Featured Photo Preview */}
-                    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/15 bg-black shadow-2xl group">
-                      <Image
-                        src={activeProject.gallery[activeImageIdx].src}
-                        alt={activeProject.gallery[activeImageIdx].title}
-                        fill
-                        className="object-contain sm:object-cover"
-                        priority
-                      />
+                    <div className="flex flex-col gap-3">
+                      <div className="relative w-full h-[50vh] sm:h-[60vh] max-h-[600px] rounded-2xl overflow-hidden border border-white/15 bg-black/95 shadow-2xl flex items-center justify-center group">
+                        <Image
+                          src={activeProject.gallery[activeImageIdx].src}
+                          alt={activeProject.gallery[activeImageIdx].title}
+                          fill
+                          className="object-contain p-2"
+                          priority
+                        />
 
-                      {/* Photo Caption Overlay */}
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 bg-gradient-to-t from-black/95 via-black/60 to-transparent flex flex-col">
-                        <span className="text-base sm:text-lg font-bold text-white">
-                          {activeProject.gallery[activeImageIdx].title}
-                        </span>
-                        <span className="text-xs sm:text-sm text-foreground/80 font-light mt-1">
-                          {activeProject.gallery[activeImageIdx].description}
-                        </span>
+                        {/* Left / Right image switchers */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveImageIdx(
+                              (prev) => (prev - 1 + activeProject.gallery!.length) % activeProject.gallery!.length
+                            );
+                          }}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-black/95 text-white flex items-center justify-center border border-white/20 backdrop-blur-md opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer shadow-lg z-20"
+                          aria-label="Previous image"
+                        >
+                          <ChevronLeft className="w-5 h-5" />
+                        </button>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveImageIdx((prev) => (prev + 1) % activeProject.gallery!.length);
+                          }}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-black/95 text-white flex items-center justify-center border border-white/20 backdrop-blur-md opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer shadow-lg z-20"
+                          aria-label="Next image"
+                        >
+                          <ChevronRight className="w-5 h-5" />
+                        </button>
                       </div>
 
-                      {/* Left / Right image switchers */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveImageIdx(
-                            (prev) => (prev - 1 + activeProject.gallery!.length) % activeProject.gallery!.length
-                          );
-                        }}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 backdrop-blur-md opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer"
-                        aria-label="Previous image"
-                      >
-                        <ChevronLeft className="w-5 h-5" />
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveImageIdx((prev) => (prev + 1) % activeProject.gallery!.length);
-                        }}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 backdrop-blur-md opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer"
-                        aria-label="Next image"
-                      >
-                        <ChevronRight className="w-5 h-5" />
-                      </button>
+                      {/* Dedicated Photo Caption Bar */}
+                      <div className="p-4 rounded-xl bg-white/[0.04] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                          <h4 className="text-base font-bold text-white">
+                            {activeProject.gallery[activeImageIdx].title}
+                          </h4>
+                          <p className="text-xs sm:text-sm text-foreground/80 font-light mt-0.5">
+                            {activeProject.gallery[activeImageIdx].description}
+                          </p>
+                        </div>
+                        <span className="text-xs font-mono text-walnut-light px-2.5 py-1 rounded-full bg-white/5 border border-white/10 shrink-0 self-start sm:self-center">
+                          Screenshot {activeImageIdx + 1} of {activeProject.gallery.length}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Thumbnail Switcher Bar */}
@@ -502,13 +509,13 @@ export default function ProjectCarousel() {
                         <button
                           key={gIdx}
                           onClick={() => setActiveImageIdx(gIdx)}
-                          className={`relative aspect-[16/9] rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer ${
+                          className={`relative aspect-[16/9] rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer bg-black/60 ${
                             activeImageIdx === gIdx
                               ? "border-walnut-light ring-2 ring-walnut-light/50 scale-[1.03]"
                               : "border-white/10 opacity-50 hover:opacity-100"
                           }`}
                         >
-                          <Image src={item.src} alt={item.title} fill className="object-cover" />
+                          <Image src={item.src} alt={item.title} fill className="object-contain p-1" />
                         </button>
                       ))}
                     </div>
