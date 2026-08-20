@@ -32,20 +32,36 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    mouseX.set(rect.width / 2);
+    mouseY.set(rect.height / 2);
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
+      const r = containerRef.current.getBoundingClientRect();
+      mouseX.set(e.clientX - r.left);
+      mouseY.set(e.clientY - r.top);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!containerRef.current || !e.touches[0]) return;
+      const r = containerRef.current.getBoundingClientRect();
+      mouseX.set(e.touches[0].clientX - r.left);
+      mouseY.set(e.touches[0].clientY - r.top);
     };
 
     const section = containerRef.current;
     if (section) {
       section.addEventListener("mousemove", handleMouseMove);
+      section.addEventListener("touchstart", handleTouchMove, { passive: true });
+      section.addEventListener("touchmove", handleTouchMove, { passive: true });
     }
     return () => {
       if (section) {
         section.removeEventListener("mousemove", handleMouseMove);
+        section.removeEventListener("touchstart", handleTouchMove);
+        section.removeEventListener("touchmove", handleTouchMove);
       }
     };
   }, [mouseX, mouseY]);
