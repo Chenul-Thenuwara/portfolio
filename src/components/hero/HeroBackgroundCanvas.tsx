@@ -213,21 +213,29 @@ export default function HeroBackgroundCanvas() {
         }
       }
 
+      // Calculate dynamic bottom proximity fade (glow vanishes before reaching bottom edge)
+      const bottomDist = Math.max(0, height - mouse.y);
+      const bottomFade = Math.min(1, Math.max(0, bottomDist / 200));
+
       // Draw Cursor Ambient Halo
-      const haloAlpha = mouse.isHovered ? 0.22 : 0.12;
-      const haloGrad = ctx.createRadialGradient(
-        mouse.x,
-        mouse.y,
-        0,
-        mouse.x,
-        mouse.y,
-        mouse.radius * 1.5
-      );
-      haloGrad.addColorStop(0, `rgba(93, 64, 55, ${haloAlpha})`);
-      haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.4})`);
-      haloGrad.addColorStop(1, "transparent");
-      ctx.fillStyle = haloGrad;
-      ctx.fillRect(0, 0, width, height);
+      const baseAlpha = mouse.isHovered ? 0.22 : 0.12;
+      const haloAlpha = baseAlpha * bottomFade;
+
+      if (haloAlpha > 0.005) {
+        const haloGrad = ctx.createRadialGradient(
+          mouse.x,
+          mouse.y,
+          0,
+          mouse.x,
+          mouse.y,
+          mouse.radius * 1.5
+        );
+        haloGrad.addColorStop(0, `rgba(93, 64, 55, ${haloAlpha})`);
+        haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.4})`);
+        haloGrad.addColorStop(1, "transparent");
+        ctx.fillStyle = haloGrad;
+        ctx.fillRect(0, 0, width, height);
+      }
 
       // Particle physics & connection lines
       const maxConnectDist = (width < 768 ? 65 : 60) * 1.25;
@@ -241,7 +249,7 @@ export default function HeroBackgroundCanvas() {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < mouse.radius) {
-          const force = (1 - dist / mouse.radius) * 16;
+          const force = (1 - dist / mouse.radius) * 16 * bottomFade;
           const angle = Math.atan2(dy, dx);
           p.vx -= Math.cos(angle) * force * 0.22;
           p.vy -= Math.sin(angle) * force * 0.22;
@@ -260,23 +268,30 @@ export default function HeroBackgroundCanvas() {
         p.x += p.vx;
         p.y += p.vy;
 
-        // Proximity glow
+        // Proximity glow & bottom fade
+        const pBottomDist = Math.max(0, height - p.y);
+        const pBottomFade = Math.min(1, Math.max(0, pBottomDist / 160));
+
         let currentAlpha = p.alpha;
         let currentSize = p.size;
 
         if (dist < mouse.radius) {
           const proximity = 1 - dist / mouse.radius;
-          currentAlpha = Math.min(0.9, p.alpha + proximity * 0.65);
-          currentSize = p.size + proximity * 1.8;
+          currentAlpha = Math.min(0.9, p.alpha + proximity * 0.65 * bottomFade);
+          currentSize = p.size + proximity * 1.8 * bottomFade;
         }
 
-        // Draw particle dot
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = currentAlpha;
-        ctx.fill();
-        ctx.globalAlpha = 1;
+        currentAlpha *= pBottomFade;
+
+        if (currentAlpha > 0.005) {
+          // Draw particle dot
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = currentAlpha;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
 
         // Draw constellation lines between neighbors
         for (let j = i + 1; j < particles.length; j++) {
@@ -295,15 +310,23 @@ export default function HeroBackgroundCanvas() {
               (mouse.x - midX) * (mouse.x - midX) + (mouse.y - midY) * (mouse.y - midY)
             );
             if (mouseDistMid < mouse.radius) {
-              lineAlpha += (1 - mouseDistMid / mouse.radius) * 0.32;
+              lineAlpha += (1 - mouseDistMid / mouse.radius) * 0.32 * bottomFade;
             }
 
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = "rgba(230, 224, 212, " + Math.min(0.55, lineAlpha) + ")";
-            ctx.lineWidth = 0.75;
-            ctx.stroke();
+            const p2BottomDist = Math.max(0, height - p2.y);
+            const p2BottomFade = Math.min(1, Math.max(0, p2BottomDist / 160));
+            const combinedFade = Math.min(pBottomFade, p2BottomFade);
+
+            lineAlpha *= combinedFade;
+
+            if (lineAlpha > 0.005) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = "rgba(230, 224, 212, " + Math.min(0.55, lineAlpha) + ")";
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
+            }
           }
         }
       }

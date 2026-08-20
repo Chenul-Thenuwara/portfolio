@@ -31,6 +31,15 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  // Spotlight opacity that smoothly fades to 0 as the mouse nears the bottom
+  const spotlightOpacity = useTransform(smoothY, (yVal) => {
+    const h = typeof window !== "undefined" ? window.innerHeight : 900;
+    if (yVal > h - 300) {
+      return Math.max(0, 1 - (yVal - (h - 300)) / 220);
+    }
+    return 1;
+  });
+
   useEffect(() => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -75,17 +84,18 @@ export default function Hero() {
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         style={{
-          maskImage: "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
+          maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 88%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 88%)",
         }}
       >
         {/* ── 1. Interactive Physics Particle & Constellation Canvas ── */}
         <HeroBackgroundCanvas />
 
-        {/* ── 2. Interactive Mouse Spotlight Glow ── */}
+        {/* ── 2. Interactive Mouse Spotlight Glow with Dynamic Bottom Fade ── */}
         <motion.div
           className="absolute inset-0 transition-opacity duration-300"
           style={{
+            opacity: spotlightOpacity,
             background: useTransform(
               [smoothX, smoothY],
               ([x, y]) =>
