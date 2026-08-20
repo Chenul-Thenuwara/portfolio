@@ -491,7 +491,7 @@ export default function ProjectCarousel() {
   return (
     <section
       id="projects"
-      className="relative w-full py-28 md:py-36 bg-[var(--background)] overflow-hidden flex flex-col justify-center"
+      className="relative w-full pt-6 md:pt-10 pb-28 md:pb-36 bg-[var(--background)] overflow-hidden flex flex-col justify-center"
     >
       {/* Background glow accents */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-walnut-light/10 rounded-full blur-[120px] pointer-events-none" />

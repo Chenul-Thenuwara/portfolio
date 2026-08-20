@@ -78,7 +78,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--background)] py-28 cursor-default"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--background)] pt-28 pb-12 sm:pb-14 cursor-default"
     >
       {/* ── Atmospheric Background Layer with Soft Bottom Dissolve (Zero Line Separation) ── */}
       <div
@@ -270,7 +270,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="mt-14 flex flex-col items-center gap-2 pointer-events-none"
+          className="mt-8 sm:mt-10 flex flex-col items-center gap-2 pointer-events-none"
         >
           <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-foreground/40">
             Scroll
