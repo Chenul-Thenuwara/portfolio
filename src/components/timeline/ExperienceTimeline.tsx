@@ -150,8 +150,6 @@ export default function ExperienceTimeline() {
       ref={containerRef}
       className="relative w-full py-36 flex flex-col items-center bg-[var(--background)] px-6 overflow-hidden"
     >
-      <div className="absolute top-0 w-full h-[180px] bg-gradient-to-b from-[var(--deep-dark)] to-transparent pointer-events-none z-10" />
-
       <div className="z-10 text-center max-w-2xl mb-24">
         <span className="text-xs font-mono tracking-[0.25em] uppercase text-walnut-light/80 block mb-3">
           ✦ Career &amp; Milestones

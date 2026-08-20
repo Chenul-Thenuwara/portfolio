@@ -156,9 +156,6 @@ export default function Certificates() {
       ref={sectionRef}
       className="relative w-full py-32 px-6 bg-[var(--background)] overflow-hidden"
     >
-      {/* Top blend from project carousel */}
-      <div className="absolute top-0 w-full h-32 bg-gradient-to-b from-[#0c0c0c] to-transparent pointer-events-none" />
-
       {/* Decorative ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-walnut/5 blur-[120px] pointer-events-none" />
 

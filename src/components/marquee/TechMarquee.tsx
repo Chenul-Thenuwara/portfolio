@@ -20,17 +20,8 @@ const techs = [
 
 export default function TechMarquee() {
   return (
-    <section className="relative w-full py-24 bg-[var(--deep-dark)] border-y border-walnut-light/10 overflow-hidden flex flex-col justify-center">
-      <div className="absolute top-0 w-full h-[50px] bg-gradient-to-b from-[var(--background)] to-transparent pointer-events-none z-10" />
-      <div className="absolute bottom-0 w-full h-[50px] bg-gradient-to-t from-[var(--background)] to-transparent pointer-events-none z-10" />
-      
-      {/* Decorative hardware elements */}
-      <div className="absolute top-4 left-6 w-2 h-2 rounded-full border border-walnut-light/40" />
-      <div className="absolute top-4 right-6 w-2 h-2 rounded-full border border-walnut-light/40" />
-      <div className="absolute bottom-4 left-6 w-2 h-2 rounded-full border border-walnut-light/40" />
-      <div className="absolute bottom-4 right-6 w-2 h-2 rounded-full border border-walnut-light/40" />
-
-      <div className="relative flex whitespace-nowrap overflow-hidden py-10 w-full">
+    <section className="relative w-full py-20 bg-[var(--background)] overflow-hidden flex flex-col justify-center">
+      <div className="relative flex whitespace-nowrap overflow-hidden py-6 w-full">
         {/* We use two sets of elements for a seamless hardware-accelerated loop */}
         <motion.div
           className="flex w-max will-change-transform"
