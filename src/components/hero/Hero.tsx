@@ -78,7 +78,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--background)] pt-28 pb-12 sm:pb-14 cursor-default"
+      className="relative min-h-[92vh] sm:min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[var(--background)] pt-24 sm:pt-28 pb-6 sm:pb-10 cursor-default"
     >
       {/* ── Atmospheric Background Layer with Soft Bottom Dissolve (Zero Line Separation) ── */}
       <div
