@@ -271,6 +271,9 @@ export default function Hero() {
           </div>
         </motion.div>
       </motion.div>
+
+      {/* Smooth bottom gradient transition to Selected Works */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent via-[var(--deep-dark)]/80 to-[var(--background)] pointer-events-none z-10" />
     </section>
   );
 }

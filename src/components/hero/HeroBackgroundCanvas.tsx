@@ -331,6 +331,10 @@ export default function HeroBackgroundCanvas() {
     <canvas
       ref={canvasRef}
       className="pointer-events-none absolute inset-0 w-full h-full z-0 opacity-80"
+      style={{
+        maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+      }}
     />
   );
 }

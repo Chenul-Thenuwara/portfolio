@@ -493,6 +493,9 @@ export default function ProjectCarousel() {
       id="projects"
       className="relative w-full py-28 md:py-36 bg-[var(--background)] overflow-hidden flex flex-col justify-center"
     >
+      {/* Top transition blend from Hero */}
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[var(--deep-dark)] via-[var(--deep-dark)]/60 to-transparent pointer-events-none z-0" />
+
       {/* Background glow accents */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-walnut-light/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[140px] pointer-events-none" />
