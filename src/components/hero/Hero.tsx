@@ -116,7 +116,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/4 -left-32 w-[550px] h-[550px] bg-walnut/30 rounded-full blur-[130px]"
+          className="absolute top-1/4 -left-32 w-72 md:w-[550px] h-72 md:h-[550px] bg-walnut/30 rounded-full blur-[60px] md:blur-[130px] will-change-transform"
         />
 
         <motion.div
@@ -131,7 +131,7 @@ export default function Hero() {
             ease: "easeInOut",
             delay: 1,
           }}
-          className="absolute bottom-1/4 -right-32 w-[620px] h-[620px] bg-blue-900/15 rounded-full blur-[150px]"
+          className="absolute bottom-1/4 -right-32 w-72 md:w-[620px] h-72 md:h-[620px] bg-blue-900/15 rounded-full blur-[60px] md:blur-[150px] will-change-transform"
         />
       </div>
 

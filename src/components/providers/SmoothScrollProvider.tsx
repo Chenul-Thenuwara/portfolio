@@ -27,14 +27,22 @@ export default function SmoothScrollProvider({
   const getLenis = useCallback(() => lenisRef.current, []);
 
   useEffect(() => {
+    // On mobile touch devices (Android / iOS), native hardware-accelerated compositor scrolling is best
+    const isTouch = typeof window !== "undefined" && (window.matchMedia("(pointer: coarse)").matches || navigator.maxTouchPoints > 0);
+
+    if (isTouch) {
+      // Return early for touch devices so scrolling is 100% native 120fps without JS touch lag
+      return;
+    }
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 0,
     });
 
     lenisRef.current = lenis;

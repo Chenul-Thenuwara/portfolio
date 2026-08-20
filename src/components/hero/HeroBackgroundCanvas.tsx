@@ -29,10 +29,11 @@ export default function HeroBackgroundCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
+    let isVisible = true;
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -61,7 +62,9 @@ export default function HeroBackgroundCanvas() {
       width = Math.max(window.innerWidth, rect.width || window.innerWidth);
       height = Math.max(window.innerHeight, rect.height || window.innerHeight);
 
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = width < 768;
+      // On mobile / Android, clamp dpr to 1 for maximum 120fps GPU throughput
+      dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
 
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
@@ -73,19 +76,19 @@ export default function HeroBackgroundCanvas() {
 
       // Initialize / reseed particles to cover full width & height
       particles = [];
-      const isMobile = width < 768;
       const isUltrawide = width > 2000;
-      
-      mouse.radius = isMobile ? 130 : isUltrawide ? 220 : 180;
-      const spacing = isMobile ? 65 : isUltrawide ? 60 : 55;
+
+      mouse.radius = isMobile ? 110 : isUltrawide ? 220 : 180;
+      // Mobile: larger spacing (90px) gives ~35 lightweight particles instead of 300
+      const spacing = isMobile ? 90 : isUltrawide ? 62 : 55;
 
       const cols = Math.ceil(width / spacing) + 2;
       const rows = Math.ceil(height / spacing) + 2;
 
       for (let i = -1; i < cols; i++) {
         for (let j = -1; j < rows; j++) {
-          const x = i * spacing + (Math.random() - 0.5) * 10;
-          const y = j * spacing + (Math.random() - 0.5) * 10;
+          const x = i * spacing + (Math.random() - 0.5) * 8;
+          const y = j * spacing + (Math.random() - 0.5) * 8;
           particles.push({
             x,
             y,
@@ -93,9 +96,9 @@ export default function HeroBackgroundCanvas() {
             originY: y,
             vx: 0,
             vy: 0,
-            size: isMobile ? Math.random() * 1.5 + 1 : Math.random() * 1.8 + 1.2,
+            size: isMobile ? Math.random() * 1.2 + 0.8 : Math.random() * 1.8 + 1.2,
             color: colors[Math.floor(Math.random() * colors.length)],
-            alpha: Math.random() * 0.35 + 0.15,
+            alpha: isMobile ? Math.random() * 0.25 + 0.1 : Math.random() * 0.35 + 0.15,
           });
         }
       }
@@ -121,7 +124,7 @@ export default function HeroBackgroundCanvas() {
       mouse.isHovered = false;
     };
 
-    // Touch Listeners for Mobile / Tablets
+    // Touch Listeners for Mobile / Tablets (passive for zero scroll interruption)
     const handleTouchMove = (e: TouchEvent) => {
       if (!e.touches[0]) return;
       const rect = canvas.getBoundingClientRect();
@@ -154,8 +157,8 @@ export default function HeroBackgroundCanvas() {
         x: clientX - rect.left,
         y: clientY - rect.top,
         radius: 0,
-        maxRadius: width < 768 ? 160 : 240,
-        alpha: 0.85,
+        maxRadius: width < 768 ? 140 : 220,
+        alpha: 0.8,
       });
     };
 
@@ -165,7 +168,7 @@ export default function HeroBackgroundCanvas() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         setupCanvas();
-      }, 100);
+      }, 120);
     };
 
     window.addEventListener("resize", handleResize);
@@ -180,16 +183,24 @@ export default function HeroBackgroundCanvas() {
     parentEl.addEventListener("click", handleClick);
 
     // Render loop
+    const isMobile = width < 768;
+    const maxConnectDist = (isMobile ? 90 : 60) * 1.25;
+
     const render = () => {
+      if (!isVisible) {
+        animationFrameId = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       // Autonomous gentle ambient drift when idle
-      idleTime += 0.015;
+      idleTime += 0.012;
       if (!mouse.isHovered) {
-        const driftRadiusX = width * 0.25;
-        const driftRadiusY = height * 0.18;
-        mouse.targetX = width / 2 + Math.cos(idleTime * 0.7) * driftRadiusX;
-        mouse.targetY = height / 2 + Math.sin(idleTime * 0.9) * driftRadiusY;
+        const driftRadiusX = width * 0.22;
+        const driftRadiusY = height * 0.16;
+        mouse.targetX = width / 2 + Math.cos(idleTime * 0.6) * driftRadiusX;
+        mouse.targetY = height / 2 + Math.sin(idleTime * 0.8) * driftRadiusY;
       }
 
       // Smooth mouse easing
@@ -199,12 +210,12 @@ export default function HeroBackgroundCanvas() {
       // Update & Draw Click Ripples
       for (let r = ripples.length - 1; r >= 0; r--) {
         const rip = ripples[r];
-        rip.radius += 3.8;
+        rip.radius += 3.5;
         rip.alpha *= 0.94;
 
         ctx.beginPath();
         ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(141, 110, 99, ${rip.alpha * 0.65})`;
+        ctx.strokeStyle = `rgba(141, 110, 99, ${rip.alpha * 0.6})`;
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
@@ -218,10 +229,10 @@ export default function HeroBackgroundCanvas() {
       const bottomFade = Math.min(1, Math.max(0, bottomDist / 200));
 
       // Draw Cursor Ambient Halo
-      const baseAlpha = mouse.isHovered ? 0.22 : 0.12;
+      const baseAlpha = mouse.isHovered ? 0.2 : 0.1;
       const haloAlpha = baseAlpha * bottomFade;
 
-      if (haloAlpha > 0.005) {
+      if (haloAlpha > 0.008) {
         const haloGrad = ctx.createRadialGradient(
           mouse.x,
           mouse.y,
@@ -231,16 +242,15 @@ export default function HeroBackgroundCanvas() {
           mouse.radius * 1.5
         );
         haloGrad.addColorStop(0, `rgba(93, 64, 55, ${haloAlpha})`);
-        haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.4})`);
+        haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.35})`);
         haloGrad.addColorStop(1, "transparent");
         ctx.fillStyle = haloGrad;
         ctx.fillRect(0, 0, width, height);
       }
 
-      // Particle physics & connection lines
-      const maxConnectDist = (width < 768 ? 65 : 60) * 1.25;
+      const pLen = particles.length;
 
-      for (let i = 0; i < particles.length; i++) {
+      for (let i = 0; i < pLen; i++) {
         const p = particles[i];
 
         // Interaction with mouse
@@ -249,10 +259,10 @@ export default function HeroBackgroundCanvas() {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < mouse.radius) {
-          const force = (1 - dist / mouse.radius) * 16 * bottomFade;
+          const force = (1 - dist / mouse.radius) * 14 * bottomFade;
           const angle = Math.atan2(dy, dx);
-          p.vx -= Math.cos(angle) * force * 0.22;
-          p.vy -= Math.sin(angle) * force * 0.22;
+          p.vx -= Math.cos(angle) * force * 0.2;
+          p.vy -= Math.sin(angle) * force * 0.2;
         }
 
         // Return force to home grid position (spring physics)
@@ -277,14 +287,13 @@ export default function HeroBackgroundCanvas() {
 
         if (dist < mouse.radius) {
           const proximity = 1 - dist / mouse.radius;
-          currentAlpha = Math.min(0.9, p.alpha + proximity * 0.65 * bottomFade);
-          currentSize = p.size + proximity * 1.8 * bottomFade;
+          currentAlpha = Math.min(0.85, p.alpha + proximity * 0.6 * bottomFade);
+          currentSize = p.size + proximity * 1.6 * bottomFade;
         }
 
         currentAlpha *= pBottomFade;
 
-        if (currentAlpha > 0.005) {
-          // Draw particle dot
+        if (currentAlpha > 0.008) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
           ctx.fillStyle = p.color;
@@ -294,14 +303,20 @@ export default function HeroBackgroundCanvas() {
         }
 
         // Draw constellation lines between neighbors
-        for (let j = i + 1; j < particles.length; j++) {
+        for (let j = i + 1; j < pLen; j++) {
           const p2 = particles[j];
           const lineDx = p.x - p2.x;
           const lineDy = p.y - p2.y;
+
+          // Quick bounding box check before hypotenuse calculation for speed
+          if (Math.abs(lineDx) > maxConnectDist || Math.abs(lineDy) > maxConnectDist) {
+            continue;
+          }
+
           const lineDist = Math.sqrt(lineDx * lineDx + lineDy * lineDy);
 
           if (lineDist < maxConnectDist) {
-            let lineAlpha = (1 - lineDist / maxConnectDist) * 0.16;
+            let lineAlpha = (1 - lineDist / maxConnectDist) * 0.15;
 
             // Brighten if near cursor
             const midX = (p.x + p2.x) / 2;
@@ -310,7 +325,7 @@ export default function HeroBackgroundCanvas() {
               (mouse.x - midX) * (mouse.x - midX) + (mouse.y - midY) * (mouse.y - midY)
             );
             if (mouseDistMid < mouse.radius) {
-              lineAlpha += (1 - mouseDistMid / mouse.radius) * 0.32 * bottomFade;
+              lineAlpha += (1 - mouseDistMid / mouse.radius) * 0.3 * bottomFade;
             }
 
             const p2BottomDist = Math.max(0, height - p2.y);
@@ -319,11 +334,11 @@ export default function HeroBackgroundCanvas() {
 
             lineAlpha *= combinedFade;
 
-            if (lineAlpha > 0.005) {
+            if (lineAlpha > 0.008) {
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = "rgba(230, 224, 212, " + Math.min(0.55, lineAlpha) + ")";
+              ctx.strokeStyle = "rgba(230, 224, 212, " + Math.min(0.5, lineAlpha) + ")";
               ctx.lineWidth = 0.75;
               ctx.stroke();
             }
@@ -334,10 +349,28 @@ export default function HeroBackgroundCanvas() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    // IntersectionObserver to freeze canvas when scrolled out of view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationFrameId) {
+            animationFrameId = requestAnimationFrame(render);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    if (canvas) {
+      observer.observe(canvas);
+    }
+
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
