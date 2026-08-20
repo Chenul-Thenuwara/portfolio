@@ -22,14 +22,14 @@ export default function Hero() {
   const rightOrbX = useTransform(smoothX, [0, 1920], [35, -35]);
   const rightOrbY = useTransform(smoothY, [0, 1080], [25, -25]);
 
-  // Scroll parallax for content
+  // Scroll parallax for content: scrolls up smoothly and fades gracefully without cutting off
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "45%"]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -69,7 +69,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--deep-dark)] py-28 cursor-default"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--background)] py-28 cursor-default"
     >
       {/* ── 1. Interactive Physics Particle & Constellation Canvas ── */}
       <HeroBackgroundCanvas />
@@ -271,9 +271,6 @@ export default function Hero() {
           </div>
         </motion.div>
       </motion.div>
-
-      {/* Smooth bottom gradient transition to Selected Works */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent via-[var(--deep-dark)]/80 to-[var(--background)] pointer-events-none z-10" />
     </section>
   );
 }
