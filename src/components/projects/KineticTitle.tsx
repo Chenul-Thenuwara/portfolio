@@ -67,7 +67,7 @@ export default function KineticTitle() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-20 left-12 z-10 overflow-hidden"
+      className="relative max-w-7xl mx-auto w-full px-6 md:px-12 z-10 overflow-hidden mb-2"
       aria-label={TEXT}
     >
       <h2 className="text-5xl md:text-6xl font-black text-foreground flex">

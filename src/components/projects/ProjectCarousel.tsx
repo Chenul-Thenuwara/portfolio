@@ -491,7 +491,7 @@ export default function ProjectCarousel() {
   return (
     <section
       id="projects"
-      className="relative w-full pt-6 md:pt-10 pb-28 md:pb-36 bg-[var(--background)] overflow-hidden flex flex-col justify-center"
+      className="relative w-full pt-10 md:pt-14 pb-28 md:pb-36 bg-[var(--background)] overflow-hidden flex flex-col justify-center"
     >
       {/* Background glow accents */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-walnut-light/10 rounded-full blur-[120px] pointer-events-none" />
@@ -501,7 +501,7 @@ export default function ProjectCarousel() {
       <KineticTitle />
 
       {/* Navigation and instructions bar */}
-      <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex items-center justify-between mt-4 mb-6 z-10">
+      <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex items-center justify-between mt-2 mb-6 z-10">
         <p className="text-xs font-mono text-foreground/50 flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5 text-walnut-light" />
           <span>Scroll horizontally or click any project to view full architectural details &amp; gallery</span>
