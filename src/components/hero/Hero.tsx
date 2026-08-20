@@ -213,10 +213,10 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.45, ease: [0.215, 0.61, 0.355, 1] }}
           className="text-base sm:text-lg text-foreground/75 font-light max-w-2xl leading-relaxed mb-8"
         >
-          BSc (Hons) Software Engineering Graduate from{" "}
-          <span className="text-walnut-light font-medium">NSBM Green University</span>{" "}
-          in partnership with{" "}
-          <span className="text-foreground font-medium">Plymouth University (UK)</span>.
+          BSc (Hons) Software Engineering Graduate{" "}
+          <span className="text-walnut-light font-medium">(First Class Honours · Graduating Dec 2026)</span>{" "}
+          from <span className="text-foreground font-medium">NSBM Green University</span> in partnership with{" "}
+          <span className="text-foreground font-medium">University of Plymouth (UK)</span>.
           Specializing in scalable web ecosystems, cross-platform desktop software, and local-network streaming architectures.
         </motion.p>
 

@@ -83,17 +83,18 @@ const timelineData: TimelineEntry[] = [
   },
   {
     role: "BSc (Hons) in Software Engineering",
-    organization: "NSBM Green University · Plymouth University (UK)",
+    organization: "University of Plymouth (UK) · NSBM Green University",
     employmentType: "Undergraduate Degree",
     category: "Education",
-    date: "Graduated · April 2026",
+    date: "Graduating Dec 2026 · Final Transcript Released",
     location: "Homagama, Sri Lanka",
     active: false,
     bullets: [
-      "Completed final undergraduate group presentation and graduated with honors.",
-      "Built the self-hosted local media library streaming server as the official final-year engineering project.",
+      "Completed all degree requirements with First Class Honours awarded by the University of Plymouth (UK).",
+      "Final Year Computing Project achieved 79.60% overall (80% Source Code/Report, 79% Viva & Demonstration).",
+      "Academic distinctions across AI & Machine Learning (73%), Computer Graphics & Visualisation (76%), Full-Stack Development (70%), and Mobile Development (70%).",
     ],
-    tags: ["Degree Completed", "Final Year Project", "Distributed Systems", "Software Architecture"],
+    tags: ["First Class Honours", "Graduating Dec 2026", "Final Transcript Out", "Final Project: 79.6%", "Software Architecture"],
   },
 ];
 
