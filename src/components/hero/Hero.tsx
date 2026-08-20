@@ -71,50 +71,59 @@ export default function Hero() {
       ref={containerRef}
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[var(--background)] py-28 cursor-default"
     >
-      {/* ── 1. Interactive Physics Particle & Constellation Canvas ── */}
-      <HeroBackgroundCanvas />
-
-      {/* ── 2. Interactive Mouse Spotlight Glow ── */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+      {/* ── Atmospheric Background Layer with Soft Bottom Dissolve (Zero Line Separation) ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         style={{
-          background: useTransform(
-            [smoothX, smoothY],
-            ([x, y]) =>
-              `radial-gradient(800px circle at ${x}px ${y}px, rgba(93, 64, 55, 0.25), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
-          ),
+          maskImage: "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
         }}
-      />
+      >
+        {/* ── 1. Interactive Physics Particle & Constellation Canvas ── */}
+        <HeroBackgroundCanvas />
 
-      {/* ── 3. Atmospheric Side Glow Orbs with Parallax ── */}
-      <motion.div
-        style={{ x: leftOrbX, y: leftOrbY }}
-        animate={{
-          scale: [1, 1.12, 1],
-          opacity: [0.35, 0.55, 0.35],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="pointer-events-none absolute top-1/4 -left-32 w-[550px] h-[550px] bg-walnut/30 rounded-full blur-[130px]"
-      />
+        {/* ── 2. Interactive Mouse Spotlight Glow ── */}
+        <motion.div
+          className="absolute inset-0 transition-opacity duration-300"
+          style={{
+            background: useTransform(
+              [smoothX, smoothY],
+              ([x, y]) =>
+                `radial-gradient(800px circle at ${x}px ${y}px, rgba(93, 64, 55, 0.25), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
+            ),
+          }}
+        />
 
-      <motion.div
-        style={{ x: rightOrbX, y: rightOrbY }}
-        animate={{
-          scale: [1, 1.18, 1],
-          opacity: [0.25, 0.45, 0.25],
-        }}
-        transition={{
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-        className="pointer-events-none absolute bottom-1/4 -right-32 w-[620px] h-[620px] bg-blue-900/15 rounded-full blur-[150px]"
-      />
+        {/* ── 3. Atmospheric Side Glow Orbs with Parallax ── */}
+        <motion.div
+          style={{ x: leftOrbX, y: leftOrbY }}
+          animate={{
+            scale: [1, 1.12, 1],
+            opacity: [0.35, 0.55, 0.35],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-1/4 -left-32 w-[550px] h-[550px] bg-walnut/30 rounded-full blur-[130px]"
+        />
+
+        <motion.div
+          style={{ x: rightOrbX, y: rightOrbY }}
+          animate={{
+            scale: [1, 1.18, 1],
+            opacity: [0.25, 0.45, 0.25],
+          }}
+          transition={{
+            duration: 11,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute bottom-1/4 -right-32 w-[620px] h-[620px] bg-blue-900/15 rounded-full blur-[150px]"
+        />
+      </div>
 
       {/* ── 4. Side Engineering Telemetry & Accents ── */}
       {/* Left side telemetry */}
