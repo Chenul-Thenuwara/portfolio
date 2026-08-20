@@ -111,13 +111,26 @@ export default function HeroBackgroundCanvas() {
 
     setupCanvas();
 
-    // Mouse Listeners
+    // Mouse Listeners attached to window so they always receive events
     const handleMouseMove = (e: MouseEvent) => {
+      if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
-      mouse.targetX = e.clientX - rect.left;
-      mouse.targetY = e.clientY - rect.top;
-      mouse.isHovered = true;
-      idleTime = 0;
+      const clientX = e.clientX - rect.left;
+      const clientY = e.clientY - rect.top;
+
+      if (
+        clientX >= -80 &&
+        clientX <= rect.width + 80 &&
+        clientY >= -80 &&
+        clientY <= rect.height + 80
+      ) {
+        mouse.targetX = clientX;
+        mouse.targetY = clientY;
+        mouse.isHovered = true;
+        idleTime = 0;
+      } else {
+        mouse.isHovered = false;
+      }
     };
 
     const handleMouseLeave = () => {
@@ -126,12 +139,24 @@ export default function HeroBackgroundCanvas() {
 
     // Touch Listeners for Mobile / Tablets (passive for zero scroll interruption)
     const handleTouchMove = (e: TouchEvent) => {
-      if (!e.touches[0]) return;
+      if (!canvas || !e.touches[0]) return;
       const rect = canvas.getBoundingClientRect();
-      mouse.targetX = e.touches[0].clientX - rect.left;
-      mouse.targetY = e.touches[0].clientY - rect.top;
-      mouse.isHovered = true;
-      idleTime = 0;
+      const clientX = e.touches[0].clientX - rect.left;
+      const clientY = e.touches[0].clientY - rect.top;
+
+      if (
+        clientX >= -40 &&
+        clientX <= rect.width + 40 &&
+        clientY >= -40 &&
+        clientY <= rect.height + 40
+      ) {
+        mouse.targetX = clientX;
+        mouse.targetY = clientY;
+        mouse.isHovered = true;
+        idleTime = 0;
+      } else {
+        mouse.isHovered = false;
+      }
     };
 
     const handleTouchEnd = () => {
@@ -139,6 +164,7 @@ export default function HeroBackgroundCanvas() {
     };
 
     const handleClick = (e: MouseEvent | TouchEvent) => {
+      if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       let clientX = 0;
       let clientY = 0;
@@ -153,13 +179,18 @@ export default function HeroBackgroundCanvas() {
         return;
       }
 
-      ripples.push({
-        x: clientX - rect.left,
-        y: clientY - rect.top,
-        radius: 0,
-        maxRadius: width < 768 ? 140 : 220,
-        alpha: 0.8,
-      });
+      const relX = clientX - rect.left;
+      const relY = clientY - rect.top;
+
+      if (relX >= 0 && relX <= rect.width && relY >= 0 && relY <= rect.height) {
+        ripples.push({
+          x: relX,
+          y: relY,
+          radius: 0,
+          maxRadius: width < 768 ? 140 : 220,
+          alpha: 0.8,
+        });
+      }
     };
 
     // Resize Handling
@@ -174,13 +205,12 @@ export default function HeroBackgroundCanvas() {
     window.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleResize);
 
-    const parentEl = canvas.parentElement || document.body;
-    parentEl.addEventListener("mousemove", handleMouseMove);
-    parentEl.addEventListener("mouseleave", handleMouseLeave);
-    parentEl.addEventListener("touchstart", handleTouchMove, { passive: true });
-    parentEl.addEventListener("touchmove", handleTouchMove, { passive: true });
-    parentEl.addEventListener("touchend", handleTouchEnd, { passive: true });
-    parentEl.addEventListener("click", handleClick);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("touchstart", handleTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    window.addEventListener("click", handleClick);
 
     // Render loop
     const isMobile = width < 768;
@@ -374,12 +404,12 @@ export default function HeroBackgroundCanvas() {
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
-      parentEl.removeEventListener("mousemove", handleMouseMove);
-      parentEl.removeEventListener("mouseleave", handleMouseLeave);
-      parentEl.removeEventListener("touchstart", handleTouchMove);
-      parentEl.removeEventListener("touchmove", handleTouchMove);
-      parentEl.removeEventListener("touchend", handleTouchEnd);
-      parentEl.removeEventListener("click", handleClick);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("click", handleClick);
     };
   }, []);
 
