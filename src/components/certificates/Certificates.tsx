@@ -27,7 +27,7 @@ const certificates: Certificate[] = [
     title: "BSc (Hons) Software Engineering",
     issuer: "University of Plymouth (UK) · NSBM Green University",
     issuerShort: "Plymouth / NSBM",
-    date: "2023 – 2026",
+    date: "Graduating Dec 2026 (Final Transcript Out)",
     grade: "First Class Honours",
     category: "Higher Education",
     skills: "Final Project 79.6% · AI/ML (73%), Full-Stack (70%), Graphics (76%)",
