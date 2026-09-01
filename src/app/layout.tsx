@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chenul-thenuwara.tech"),
+  metadataBase: new URL("https://www.chenul-thenuwara.tech"),
   title: "Chenul Dulmika Thenuwara | Full-Stack Software Developer",
   description:
     "Full-Stack Software Developer & Software Engineering Graduate (NSBM Green University & Plymouth University). Specializing in React, Next.js, TypeScript, Node.js, Electron, and local streaming systems.",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Chenul Dulmika Thenuwara | Full-Stack Software Developer",
     description:
       "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University (Plymouth University, UK). Explore featured projects, professional experience, technical stack, and verified credentials.",
-    url: "https://chenul-thenuwara.tech",
+    url: "https://www.chenul-thenuwara.tech",
     siteName: "Chenul Dulmika Thenuwara Portfolio",
     images: [
       {
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: {
-    canonical: "https://chenul-thenuwara.tech",
+    canonical: "https://www.chenul-thenuwara.tech",
   },
 };
 
