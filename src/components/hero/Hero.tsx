@@ -182,6 +182,8 @@ export default function Hero() {
               width={140}
               height={140}
               priority
+              fetchPriority="high"
+              sizes="(max-width: 640px) 112px, 128px"
               className="w-full h-full object-cover object-[50%_18%] scale-105 group-hover:scale-110 transition duration-500"
             />
           </div>
@@ -189,9 +191,9 @@ export default function Hero() {
 
         {/* Status Badges */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="flex flex-wrap items-center justify-center gap-3 mb-6"
         >
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider bg-walnut/40 text-foreground/90 border border-walnut-light/30 backdrop-blur-md">
@@ -207,15 +209,10 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4"
-        >
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4">
           Chenul Dulmika <br className="hidden sm:block" />
           Thenuwara
-        </motion.h1>
+        </h1>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
