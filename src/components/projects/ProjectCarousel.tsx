@@ -512,7 +512,7 @@ export default function ProjectCarousel() {
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
             aria-label="Scroll left"
-            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground/80 hover:bg-white/10 hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition-all duration-200 backdrop-blur-md cursor-pointer"
+            className="w-10 h-10 rounded-full bg-[var(--card-bg)] border border-[var(--card-border)] flex items-center justify-center text-foreground/80 hover:bg-walnut/20 hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition-all duration-200 backdrop-blur-md cursor-pointer shadow-sm"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -520,7 +520,7 @@ export default function ProjectCarousel() {
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
             aria-label="Scroll right"
-            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground/80 hover:bg-white/10 hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition-all duration-200 backdrop-blur-md cursor-pointer"
+            className="w-10 h-10 rounded-full bg-[var(--card-bg)] border border-[var(--card-border)] flex items-center justify-center text-foreground/80 hover:bg-walnut/20 hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition-all duration-200 backdrop-blur-md cursor-pointer shadow-sm"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
@@ -571,8 +571,8 @@ export default function ProjectCarousel() {
                 </div>
               )}
 
-              {/* Gradient tint */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+              {/* Enhanced dark gradient backdrop to guarantee 100% crystal clear contrast for text over any photo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 via-50% to-black/25" />
 
               {/* Radial accent illumination */}
               <div
@@ -592,7 +592,7 @@ export default function ProjectCarousel() {
             </div>
 
             {/* Content overlay */}
-            <div className="relative p-6 sm:p-8 flex flex-col justify-end z-10">
+            <div className="relative p-6 sm:p-8 flex flex-col justify-end z-10 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 {project.badge && (
                   <span
@@ -611,11 +611,11 @@ export default function ProjectCarousel() {
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 leading-tight group-hover:text-white transition-colors">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight group-hover:text-amber-200 transition-colors">
                 {project.title}
               </h3>
 
-              <p className="text-foreground/75 font-light text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+              <p className="text-white/80 font-light text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
                 {project.desc}
               </p>
 
@@ -624,13 +624,13 @@ export default function ProjectCarousel() {
                 {project.tech.slice(0, 5).map((t) => (
                   <span
                     key={t}
-                    className="text-[10px] font-mono tracking-wider px-2.5 py-0.5 rounded-full border border-white/15 text-foreground/90 bg-white/10 backdrop-blur-sm"
+                    className="text-[10px] font-mono tracking-wider px-2.5 py-0.5 rounded-full border border-white/20 text-white/90 bg-white/10 backdrop-blur-md shadow-sm"
                   >
                     {t}
                   </span>
                 ))}
                 {project.tech.length > 5 && (
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-white/10 text-foreground/50 bg-white/5">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-white/15 text-white/60 bg-white/5 backdrop-blur-sm">
                     +{project.tech.length - 5}
                   </span>
                 )}
@@ -827,9 +827,9 @@ export default function ProjectCarousel() {
                       </div>
 
                       {/* Dedicated Photo Caption Bar */}
-                      <div className="p-4 rounded-xl bg-white/[0.04] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="p-4 rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div>
-                          <h4 className="text-base font-bold text-white flex items-center gap-2">
+                          <h4 className="text-base font-bold text-foreground flex items-center gap-2">
                             <span>{activeProject.gallery[activeImageIdx].title}</span>
                           </h4>
                           <p className="text-xs sm:text-sm text-foreground/80 font-light mt-0.5">
@@ -838,11 +838,11 @@ export default function ProjectCarousel() {
                         </div>
                         <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
                           {activeProject.gallery[activeImageIdx].category && (
-                            <span className="text-xs font-mono text-foreground/60 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                            <span className="text-xs font-mono text-foreground/70 px-2.5 py-1 rounded-full bg-walnut/10 border border-[var(--card-border)]">
                               {activeProject.gallery[activeImageIdx].category}
                             </span>
                           )}
-                          <span className="text-xs font-mono text-walnut-light px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                          <span className="text-xs font-mono text-walnut-light px-2.5 py-1 rounded-full bg-walnut/10 border border-[var(--card-border)]">
                             {activeImageIdx + 1} / {activeProject.gallery.length}
                           </span>
                         </div>
@@ -853,7 +853,7 @@ export default function ProjectCarousel() {
 
                 {/* ── Key Engineering & Architectural Highlights ── */}
                 {activeProject.highlights && activeProject.highlights.length > 0 && (
-                  <div className="space-y-3 pt-4 border-t border-white/10">
+                  <div className="space-y-3 pt-4 border-t border-[var(--card-border)]">
                     <h3 className="text-sm font-mono uppercase tracking-widest text-walnut-light flex items-center gap-2">
                       <Terminal className="w-4 h-4" />
                       <span>Key Technical Highlights &amp; System Architecture</span>
@@ -862,7 +862,7 @@ export default function ProjectCarousel() {
                       {activeProject.highlights.map((highlight, hIdx) => (
                         <div
                           key={hIdx}
-                          className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex items-start gap-3"
+                          className="p-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] flex items-start gap-3"
                         >
                           <CheckCircle2
                             className="w-5 h-5 shrink-0 mt-0.5"
@@ -878,7 +878,7 @@ export default function ProjectCarousel() {
                 )}
 
                 {/* ── Tech Stack ── */}
-                <div className="space-y-3 pt-4 border-t border-white/10">
+                <div className="space-y-3 pt-4 border-t border-[var(--card-border)]">
                   <h3 className="text-sm font-mono uppercase tracking-widest text-walnut-light">
                     Technology Stack &amp; Protocols
                   </h3>
@@ -886,7 +886,7 @@ export default function ProjectCarousel() {
                     {activeProject.tech.map((t) => (
                       <span
                         key={t}
-                        className="text-xs font-mono px-3.5 py-1.5 rounded-full border border-white/15 text-foreground/90 bg-white/5 backdrop-blur-sm"
+                        className="text-xs font-mono px-3.5 py-1.5 rounded-full border border-[var(--card-border)] text-foreground/90 bg-walnut/10 backdrop-blur-sm"
                       >
                         {t}
                       </span>
@@ -896,11 +896,11 @@ export default function ProjectCarousel() {
               </div>
 
               {/* Footer */}
-              <div className="px-6 sm:px-8 py-4 bg-[#140e0d]/90 border-t border-white/10 flex items-center justify-between text-xs font-mono text-foreground/50">
+              <div className="px-6 sm:px-8 py-4 bg-[var(--card-bg-solid)] border-t border-[var(--card-border)] flex items-center justify-between text-xs font-mono text-foreground/60">
                 <span>Press ESC or click outside to close</span>
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-foreground text-[var(--background)] font-semibold hover:opacity-90 transition-opacity cursor-pointer shadow-md"
                 >
                   Done Viewing
                 </button>
