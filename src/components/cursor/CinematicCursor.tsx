@@ -16,13 +16,13 @@ export default function CinematicCursor() {
   const mouseX = useMotionValue(-200);
   const mouseY = useMotionValue(-200);
 
-  // Ultra-smooth spring config — high stiffness keeps it tight, damping prevents wobble
-  const springConfig = { stiffness: 280, damping: 28, mass: 0.5 };
+  // Hyper-responsive spring config — high stiffness and low mass for instant responsiveness without losing fluid physics
+  const springConfig = { stiffness: 1100, damping: 48, mass: 0.08 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
-  // Slightly laggier inner dot for secondary feel
-  const dotSpringConfig = { stiffness: 400, damping: 35, mass: 0.3 };
+  // Pinpoint accurate inner dot tracking for zero cursor delay
+  const dotSpringConfig = { stiffness: 1600, damping: 55, mass: 0.04 };
   const dotX = useSpring(mouseX, dotSpringConfig);
   const dotY = useSpring(mouseY, dotSpringConfig);
 

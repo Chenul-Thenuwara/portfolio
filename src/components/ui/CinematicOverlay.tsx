@@ -11,8 +11,8 @@ export default function CinematicOverlay() {
     typeof window !== "undefined" ? window.innerHeight / 2 : 0
   );
 
-  // Ultra-smooth spring for spotlight — slightly lazier than cursor for atmosphere
-  const springConfig = { stiffness: 80, damping: 20, mass: 1.2 };
+  // Smooth spring for ambient spotlight — responsive tracking with gentle atmospheric easing
+  const springConfig = { stiffness: 450, damping: 32, mass: 0.15 };
   const spotX = useSpring(mouseX, springConfig);
   const spotY = useSpring(mouseY, springConfig);
 

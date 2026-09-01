@@ -233,9 +233,9 @@ export default function HeroBackgroundCanvas() {
         mouse.targetY = height / 2 + Math.sin(idleTime * 0.8) * driftRadiusY;
       }
 
-      // Smooth mouse easing
-      mouse.x += (mouse.targetX - mouse.x) * 0.1;
-      mouse.y += (mouse.targetY - mouse.y) * 0.1;
+      // Responsive mouse easing — fast, immediate particle physics response without latency
+      mouse.x += (mouse.targetX - mouse.x) * 0.38;
+      mouse.y += (mouse.targetY - mouse.y) * 0.38;
 
       // Update & Draw Click Ripples
       for (let r = ripples.length - 1; r >= 0; r--) {
