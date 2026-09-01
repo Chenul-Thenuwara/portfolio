@@ -32,12 +32,27 @@ export const metadata: Metadata = {
     "Sri Lanka Developer",
   ],
   authors: [{ name: "Chenul Dulmika Thenuwara" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/logo.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png" }],
+  },
   openGraph: {
     title: "Chenul Dulmika Thenuwara | Full-Stack Software Developer",
     description:
       "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University (Plymouth University, UK). Explore featured projects, professional experience, technical stack, and verified credentials.",
     url: "https://chenul-thenuwara.tech",
     siteName: "Chenul Dulmika Thenuwara Portfolio",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "Chenul Dulmika Thenuwara Logo",
+      },
+    ],
     type: "website",
   },
   alternates: {

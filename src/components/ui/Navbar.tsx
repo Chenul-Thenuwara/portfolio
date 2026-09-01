@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Terminal, ExternalLink } from "lucide-react";
 
@@ -33,8 +34,15 @@ export default function Navbar() {
           href="#"
           className="flex items-center gap-2.5 group text-foreground font-bold tracking-tight text-sm"
         >
-          <div className="w-8 h-8 rounded-lg bg-walnut/50 border border-walnut-light/40 flex items-center justify-center text-foreground group-hover:scale-105 group-hover:border-walnut-light transition-all duration-300">
-            <span className="font-mono text-xs font-black text-walnut-light">CD</span>
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-walnut-light/40 group-hover:border-walnut-light bg-black/60 shadow-md group-hover:scale-105 group-hover:shadow-[0_0_16px_rgba(184,138,106,0.35)] transition-all duration-300 flex-shrink-0">
+            <Image
+              src="/images/logo.png"
+              alt="Chenul Thenuwara Logo"
+              width={36}
+              height={36}
+              priority
+              className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300"
+            />
           </div>
           <span className="hidden sm:inline font-mono tracking-widest text-xs uppercase text-foreground/80 group-hover:text-foreground transition-colors">
             Chenul Thenuwara

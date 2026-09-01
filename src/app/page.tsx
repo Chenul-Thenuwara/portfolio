@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "@/components/ui/Navbar";
 import Hero from "@/components/hero/Hero";
 import ExperienceTimeline from "@/components/timeline/ExperienceTimeline";
@@ -19,7 +20,16 @@ export default function Home() {
       <footer className="w-full py-20 px-6 flex flex-col items-center gap-6 text-center border-t border-white/5 bg-[var(--deep-dark)] relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-walnut/10 blur-3xl pointer-events-none" />
         
-        <div className="flex flex-col items-center gap-2 z-10">
+        <div className="flex flex-col items-center gap-3 z-10">
+          <div className="w-14 h-14 rounded-full overflow-hidden border border-walnut-light/40 shadow-[0_0_20px_rgba(184,138,106,0.2)] bg-black/60">
+            <Image
+              src="/images/logo.png"
+              alt="Chenul Dulmika Thenuwara"
+              width={56}
+              height={56}
+              className="w-full h-full object-cover"
+            />
+          </div>
           <p className="text-foreground/40 text-xs tracking-[0.25em] font-mono uppercase">
             Full-Stack Software Developer
           </p>
