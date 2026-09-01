@@ -365,10 +365,13 @@ export default function HeroBackgroundCanvas() {
             lineAlpha *= combinedFade;
 
             if (lineAlpha > 0.008) {
+              const isLight = document.documentElement.classList.contains("light");
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = "rgba(230, 224, 212, " + Math.min(0.5, lineAlpha) + ")";
+              ctx.strokeStyle = isLight
+                ? `rgba(62, 39, 35, ${Math.min(0.35, lineAlpha * 0.9)})`
+                : `rgba(230, 224, 212, ${Math.min(0.5, lineAlpha)})`;
               ctx.lineWidth = 0.75;
               ctx.stroke();
             }

@@ -164,7 +164,7 @@ export default function ExperienceTimeline() {
 
       <div className="relative w-full max-w-5xl mx-auto flex flex-col z-10">
         {/* Background track line */}
-        <div className="hidden md:block absolute left-1/2 -ml-[1px] w-[2px] h-full bg-white/10" />
+        <div className="hidden md:block absolute left-1/2 -ml-[1px] w-[2px] h-full bg-[var(--card-border)]" />
 
         {/* The active drawing line */}
         <div
@@ -200,12 +200,12 @@ export default function ExperienceTimeline() {
                   isEven ? "md:items-start md:text-left" : "md:items-end md:text-left"
                 }`}
               >
-                <div className="w-full bg-[rgba(26,20,19,0.7)] backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5 shadow-2xl hover:border-walnut-light/30 transition-all duration-300 group">
+                <div className="w-full bg-[var(--card-bg)] backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-[var(--card-border)] shadow-xl hover:border-walnut-light/40 transition-all duration-300 group">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <span className="text-walnut-light text-xs font-mono tracking-widest font-semibold">
                       {item.date}
                     </span>
-                    <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-white/5 border border-white/10 text-foreground/60">
+                    <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-walnut/10 border border-[var(--card-border)] text-foreground/70">
                       {item.category}
                     </span>
                   </div>
@@ -252,7 +252,7 @@ export default function ExperienceTimeline() {
                         {item.images.map((img, imgIdx) => (
                           <div
                             key={imgIdx}
-                            className="group/img relative rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black/40 aspect-[16/9]"
+                            className="group/img relative rounded-xl overflow-hidden border border-[var(--card-border)] shadow-lg bg-black/40 aspect-[16/9]"
                           >
                             <Image
                               src={img.src}
@@ -263,7 +263,7 @@ export default function ExperienceTimeline() {
                             />
                             {img.caption && (
                               <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-center justify-between">
-                                <span className="text-[10px] font-mono text-foreground/80 tracking-wide">
+                                <span className="text-[10px] font-mono text-white/90 tracking-wide">
                                   {img.caption}
                                 </span>
                               </div>
@@ -275,11 +275,11 @@ export default function ExperienceTimeline() {
                   )}
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-5 pt-3 border-t border-white/5">
+                  <div className="flex flex-wrap gap-1.5 mt-5 pt-3 border-t border-[var(--card-border)]">
                     {item.tags.map((t) => (
                       <span
                         key={t}
-                        className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/5 text-foreground/50 group-hover:text-foreground/80 transition-colors"
+                        className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-walnut/10 border border-[var(--card-border)] text-foreground/60 group-hover:text-foreground/90 transition-colors"
                       >
                         {t}
                       </span>

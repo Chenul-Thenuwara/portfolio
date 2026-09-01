@@ -536,7 +536,7 @@ export default function ProjectCarousel() {
           <motion.div
             key={project.id}
             onClick={() => openProjectModal(project)}
-            className="group relative w-[85vw] sm:w-[420px] md:w-[480px] lg:w-[520px] aspect-[4/3] rounded-2xl cursor-pointer overflow-hidden shadow-2xl shrink-0 border border-white/10 bg-[#120d0c] snap-start hover:border-walnut-light/40 transition-all duration-500 flex flex-col justify-end"
+            className="group relative w-[85vw] sm:w-[420px] md:w-[480px] lg:w-[520px] aspect-[4/3] rounded-2xl cursor-pointer overflow-hidden shadow-2xl shrink-0 border border-[var(--card-border)] bg-[var(--card-bg-solid)] snap-start hover:border-walnut-light/50 transition-all duration-500 flex flex-col justify-end"
             whileHover={{ y: -6, scale: 1.01 }}
             transition={{ duration: 0.3 }}
           >
@@ -661,7 +661,7 @@ export default function ProjectCarousel() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActiveProject(null)}
-              className="fixed inset-0 bg-black/85 backdrop-blur-md"
+              className="fixed inset-0 bg-[var(--modal-overlay)] backdrop-blur-md"
               data-lenis-prevent="true"
             />
 
@@ -671,14 +671,14 @@ export default function ProjectCarousel() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl h-auto max-h-[88vh] bg-[#140e0d] border border-white/15 rounded-3xl shadow-2xl overflow-y-auto no-scrollbar z-10 text-foreground flex flex-col overscroll-contain"
+              className="relative w-full max-w-5xl h-auto max-h-[88vh] bg-[var(--card-bg-solid)] border border-[var(--card-border)] rounded-3xl shadow-2xl overflow-y-auto no-scrollbar z-10 text-foreground flex flex-col overscroll-contain"
               data-lenis-prevent="true"
               onWheel={(e) => {
                 e.stopPropagation();
               }}
             >
               {/* Header bar */}
-              <div className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-8 py-5 bg-[#140e0d]/95 backdrop-blur-md border-b border-white/10">
+              <div className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-8 py-5 bg-[var(--card-bg-solid)]/95 backdrop-blur-md border-b border-[var(--card-border)]">
                 <div className="flex flex-wrap items-center gap-3">
                   {activeProject.badge && (
                     <span
@@ -692,14 +692,14 @@ export default function ProjectCarousel() {
                       {activeProject.badge}
                     </span>
                   )}
-                  <span className="text-xs font-mono text-white/80 px-3 py-1 rounded-full bg-white/10 border border-white/15">
+                  <span className="text-xs font-mono text-foreground/80 px-3 py-1 rounded-full bg-walnut/10 border border-[var(--card-border)]">
                     {activeProject.role}
                   </span>
                 </div>
 
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-foreground/70 hover:text-white transition-colors cursor-pointer"
+                  className="p-2 rounded-full bg-walnut/10 hover:bg-walnut/20 text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
                   aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />

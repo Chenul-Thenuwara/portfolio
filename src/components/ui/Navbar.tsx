@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Terminal, ExternalLink } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +25,7 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 flex justify-center ${
         scrolled
-          ? "bg-[rgba(12,12,12,0.8)] backdrop-blur-xl border-b border-white/10 shadow-2xl py-3"
+          ? "bg-[var(--nav-bg)] backdrop-blur-xl border-b border-[var(--nav-border)] shadow-xl py-3"
           : "bg-transparent"
       }`}
     >
@@ -53,31 +54,34 @@ export default function Navbar() {
         <nav className="flex items-center gap-1 sm:gap-2">
           <a
             href="#projects"
-            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 transition-colors"
+            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-black/5 transition-colors"
           >
             Projects
           </a>
           <a
             href="#experience"
-            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 transition-colors"
+            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-black/5 transition-colors"
           >
             Experience
           </a>
           <a
             href="#certificates"
-            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 transition-colors"
+            className="px-3 py-1.5 rounded-full text-xs font-mono text-foreground/70 hover:text-foreground hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-black/5 transition-colors"
           >
             Credentials
           </a>
         </nav>
 
-        {/* Right side socials / status */}
-        <div className="flex items-center gap-3">
+        {/* Right side socials / status & Theme Toggle */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          {/* Theme Toggle Button */}
+          <ThemeToggle />
+
           <a
             href="https://github.com/Chenul-Thenuwara"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-full text-foreground/70 hover:text-foreground hover:bg-white/5 transition-all flex items-center justify-center"
+            className="p-2 rounded-full text-foreground/70 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-all flex items-center justify-center"
             aria-label="GitHub Profile"
           >
             <svg
@@ -96,7 +100,7 @@ export default function Navbar() {
             href="https://github.com/Chenul-Thenuwara"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-1.5 rounded-full bg-walnut/40 border border-walnut-light/30 text-foreground hover:bg-walnut/70 transition-all duration-200"
+            className="hidden md:inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-1.5 rounded-full bg-walnut/30 border border-walnut-light/30 text-foreground hover:bg-walnut/60 transition-all duration-200"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
             GitHub Profile

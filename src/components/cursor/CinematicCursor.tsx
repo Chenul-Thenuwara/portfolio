@@ -114,15 +114,16 @@ export default function CinematicCursor() {
                 cx="18"
                 cy="18"
                 r="16"
-                stroke={isHovering ? "rgba(230,224,212,0.9)" : "rgba(230,224,212,0.6)"}
+                stroke="var(--foreground)"
+                strokeOpacity={isHovering ? "0.9" : "0.55"}
                 strokeWidth={isHovering ? "1.5" : "1"}
                 fill="none"
               />
               {/* Corner tick marks — minimalist geometric detail */}
-              <line x1="18" y1="2" x2="18" y2="6" stroke="rgba(230,224,212,0.5)" strokeWidth="1" />
-              <line x1="18" y1="30" x2="18" y2="34" stroke="rgba(230,224,212,0.5)" strokeWidth="1" />
-              <line x1="2" y1="18" x2="6" y2="18" stroke="rgba(230,224,212,0.5)" strokeWidth="1" />
-              <line x1="30" y1="18" x2="34" y2="18" stroke="rgba(230,224,212,0.5)" strokeWidth="1" />
+              <line x1="18" y1="2" x2="18" y2="6" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
+              <line x1="18" y1="30" x2="18" y2="34" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
+              <line x1="2" y1="18" x2="6" y2="18" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
+              <line x1="30" y1="18" x2="34" y2="18" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
             </svg>
           </motion.div>
 
@@ -144,11 +145,11 @@ export default function CinematicCursor() {
             transition={{ duration: 0.1 }}
           >
             <div
+              className="bg-[var(--foreground)] opacity-90"
               style={{
                 width: 4,
                 height: 4,
                 borderRadius: "50%",
-                background: "rgba(230,224,212,0.9)",
               }}
             />
           </motion.div>

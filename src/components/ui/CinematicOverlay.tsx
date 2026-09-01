@@ -46,7 +46,7 @@ export default function CinematicOverlay() {
             height: 700,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(93,64,55,0.18) 0%, rgba(62,39,35,0.10) 35%, transparent 70%)",
+              "radial-gradient(circle, var(--spotlight-glow) 0%, transparent 70%)",
             filter: "blur(2px)",
           }}
         />
@@ -56,8 +56,8 @@ export default function CinematicOverlay() {
       {/* Full screen, pointer-events-none, highest z-index */}
       <div
         aria-hidden="true"
-        className="fixed inset-0 pointer-events-none z-[9998] mix-blend-overlay opacity-[0.35]"
-        style={{ filter: "url(#film-grain)" }}
+        className="fixed inset-0 pointer-events-none z-[9998] mix-blend-overlay"
+        style={{ filter: "url(#film-grain)", opacity: "var(--grain-opacity, 0.35)" }}
       />
 
       {/* SVG filter definition — hidden but applied globally */}

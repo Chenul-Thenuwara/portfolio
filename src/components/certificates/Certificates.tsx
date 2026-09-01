@@ -184,8 +184,7 @@ export default function Certificates() {
           {certificates.map((cert, idx) => (
             <motion.div
               key={idx}
-              className="group relative rounded-2xl border border-white/5 overflow-hidden backdrop-blur-sm flex flex-col justify-between"
-              style={{ background: "rgba(26,15,14,0.6)" }}
+              className="group relative rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] overflow-hidden backdrop-blur-sm flex flex-col justify-between shadow-lg"
               whileHover={{
                 y: -6,
                 scale: 1.015,
@@ -228,26 +227,26 @@ export default function Certificates() {
                 </div>
 
                 <div className="flex flex-col gap-1 flex-1">
-                  <h3 className="text-sm font-semibold text-foreground leading-snug group-hover:text-white transition-colors duration-300">
+                  <h3 className="text-sm font-semibold text-foreground leading-snug group-hover:text-walnut-accent transition-colors duration-300">
                     {cert.title}
                   </h3>
-                  <p className="text-xs text-foreground/60 font-light">
+                  <p className="text-xs text-foreground/70 font-light">
                     {cert.issuer}
                   </p>
                   {cert.skills && (
-                    <p className="text-[11px] text-foreground/45 font-mono mt-1.5 line-clamp-2">
+                    <p className="text-[11px] text-foreground/50 font-mono mt-1.5 line-clamp-2">
                       {cert.skills}
                     </p>
                   )}
                 </div>
 
                 {/* Footer: date + category */}
-                <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
-                  <span className="text-xs font-mono text-foreground/40">
+                <div className="flex items-center justify-between mt-auto pt-3 border-t border-[var(--card-border)]">
+                  <span className="text-xs font-mono text-foreground/50">
                     {cert.date}
                   </span>
                   {cert.category && (
-                    <span className="text-[10px] font-mono text-foreground/40 uppercase tracking-wider">
+                    <span className="text-[10px] font-mono text-foreground/50 uppercase tracking-wider">
                       {cert.category}
                     </span>
                   )}

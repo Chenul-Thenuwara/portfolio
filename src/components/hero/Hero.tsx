@@ -221,7 +221,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-          className="text-xl sm:text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#e6e0d4] via-[#d7ccc8] to-[#a1887f] mb-4"
+          className="text-xl sm:text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/85 to-walnut-accent mb-4"
         >
           Full-Stack Software Developer
         </motion.div>
@@ -248,13 +248,13 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-foreground text-[var(--background)] hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_25px_rgba(230,224,212,0.2)]"
+            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-foreground text-[var(--background)] hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-[0_0_25px_rgba(184,138,106,0.25)]"
           >
             Explore Projects
           </a>
           <a
             href="#experience"
-            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-white/5 border border-white/15 text-foreground hover:bg-white/10 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
+            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-walnut/15 border border-[var(--card-border)] text-foreground hover:bg-walnut/30 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
           >
             Experience
           </a>

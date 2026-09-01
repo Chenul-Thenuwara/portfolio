@@ -17,7 +17,7 @@ export default function Home() {
       <Certificates />
 
       {/* Modern Footer */}
-      <footer className="w-full py-20 px-6 flex flex-col items-center gap-6 text-center border-t border-white/5 bg-[var(--deep-dark)] relative overflow-hidden">
+      <footer className="w-full py-20 px-6 flex flex-col items-center gap-6 text-center border-t border-[var(--card-border)] bg-[var(--deep-dark)] relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-walnut/10 blur-3xl pointer-events-none" />
         
         <div className="flex flex-col items-center gap-3 z-10">
@@ -73,7 +73,7 @@ export default function Home() {
           </a>
         </div>
 
-        <p className="text-foreground/30 text-xs font-mono z-10 pt-4 border-t border-white/5 w-full max-w-md">
+        <p className="text-foreground/30 text-xs font-mono z-10 pt-4 border-t border-[var(--card-border)] w-full max-w-md">
           &copy; {new Date().getFullYear()} Chenul Dulmika Thenuwara — Engineered for Performance
         </p>
       </footer>
