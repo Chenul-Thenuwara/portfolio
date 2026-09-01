@@ -263,6 +263,7 @@ export default function HeroBackgroundCanvas() {
       const haloAlpha = baseAlpha * bottomFade;
 
       if (haloAlpha > 0.008) {
+        const isLight = document.documentElement.classList.contains("light");
         const haloGrad = ctx.createRadialGradient(
           mouse.x,
           mouse.y,
@@ -271,9 +272,15 @@ export default function HeroBackgroundCanvas() {
           mouse.y,
           mouse.radius * 1.5
         );
-        haloGrad.addColorStop(0, `rgba(93, 64, 55, ${haloAlpha})`);
-        haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.35})`);
-        haloGrad.addColorStop(1, "transparent");
+        if (isLight) {
+          haloGrad.addColorStop(0, `rgba(255, 255, 255, ${haloAlpha * 0.95})`);
+          haloGrad.addColorStop(0.5, `rgba(235, 225, 210, ${haloAlpha * 0.45})`);
+          haloGrad.addColorStop(1, "transparent");
+        } else {
+          haloGrad.addColorStop(0, `rgba(93, 64, 55, ${haloAlpha})`);
+          haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.35})`);
+          haloGrad.addColorStop(1, "transparent");
+        }
         ctx.fillStyle = haloGrad;
         ctx.fillRect(0, 0, width, height);
       }

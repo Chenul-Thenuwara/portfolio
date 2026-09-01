@@ -93,13 +93,13 @@ export default function Hero() {
 
         {/* ── 2. Interactive Mouse Spotlight Glow with Dynamic Bottom Fade ── */}
         <motion.div
-          className="absolute inset-0 transition-opacity duration-300"
+          className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
           style={{
             opacity: spotlightOpacity,
             background: useTransform(
               [smoothX, smoothY],
               ([x, y]) =>
-                `radial-gradient(800px circle at ${x}px ${y}px, rgba(93, 64, 55, 0.25), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
+                `radial-gradient(750px circle at ${x}px ${y}px, var(--hero-spotlight-start, rgba(93, 64, 55, 0.25)), var(--hero-spotlight-mid, rgba(59, 130, 246, 0.08)) 45%, transparent 75%)`
             ),
           }}
         />

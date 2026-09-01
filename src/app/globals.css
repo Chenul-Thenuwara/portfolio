@@ -39,6 +39,8 @@ html.dark,
   --nav-border: rgba(255, 255, 255, 0.1);
   --modal-overlay: rgba(0, 0, 0, 0.85);
   --spotlight-glow: rgba(93, 64, 55, 0.25);
+  --hero-spotlight-start: rgba(93, 64, 55, 0.25);
+  --hero-spotlight-mid: rgba(59, 130, 246, 0.08);
   --orb-left-bg: rgba(62, 39, 35, 0.35);
   --orb-right-bg: rgba(30, 58, 138, 0.15);
   --scrollbar-thumb: #3e2723;
@@ -63,11 +65,13 @@ html.light,
   --nav-bg: rgba(248, 246, 240, 0.85);
   --nav-border: rgba(62, 39, 35, 0.12);
   --modal-overlay: rgba(30, 25, 21, 0.7);
-  --spotlight-glow: rgba(141, 110, 99, 0.16);
-  --orb-left-bg: rgba(184, 138, 106, 0.25);
-  --orb-right-bg: rgba(147, 197, 253, 0.2);
+  --spotlight-glow: rgba(255, 255, 255, 0.7);
+  --hero-spotlight-start: rgba(255, 255, 255, 0.85);
+  --hero-spotlight-mid: rgba(235, 222, 208, 0.4);
+  --orb-left-bg: rgba(184, 138, 106, 0.15);
+  --orb-right-bg: rgba(147, 197, 253, 0.15);
   --scrollbar-thumb: #a1887f;
-  --grain-opacity: 0.16;
+  --grain-opacity: 0.12;
 }
 
 /* Base resets & utilities */
