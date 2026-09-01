@@ -97,7 +97,7 @@ export default function Hero() {
           style={{
             opacity: spotlightOpacity,
             background: useTransform(
-              [smoothX, smoothY],
+              [mouseX, mouseY],
               ([x, y]) =>
                 `radial-gradient(750px circle at ${x}px ${y}px, var(--hero-spotlight-start, rgba(93, 64, 55, 0.25)), var(--hero-spotlight-mid, rgba(59, 130, 246, 0.08)) 45%, transparent 75%)`
             ),

@@ -111,7 +111,7 @@ export default function HeroBackgroundCanvas() {
 
     setupCanvas();
 
-    // Mouse Listeners attached to window so they always receive events
+    // Mouse Listeners attached to window for instant event tracking
     const handleMouseMove = (e: MouseEvent) => {
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
@@ -126,6 +126,8 @@ export default function HeroBackgroundCanvas() {
       ) {
         mouse.targetX = clientX;
         mouse.targetY = clientY;
+        mouse.x = clientX;
+        mouse.y = clientY;
         mouse.isHovered = true;
         idleTime = 0;
       } else {
@@ -224,18 +226,19 @@ export default function HeroBackgroundCanvas() {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Autonomous gentle ambient drift when idle
+      // Autonomous gentle ambient drift when idle, 1:1 instantaneous response when hovered
       idleTime += 0.012;
       if (!mouse.isHovered) {
         const driftRadiusX = width * 0.22;
         const driftRadiusY = height * 0.16;
         mouse.targetX = width / 2 + Math.cos(idleTime * 0.6) * driftRadiusX;
         mouse.targetY = height / 2 + Math.sin(idleTime * 0.8) * driftRadiusY;
+        mouse.x += (mouse.targetX - mouse.x) * 0.08;
+        mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      } else {
+        mouse.x = mouse.targetX;
+        mouse.y = mouse.targetY;
       }
-
-      // Responsive mouse easing — fast, immediate particle physics response without latency
-      mouse.x += (mouse.targetX - mouse.x) * 0.38;
-      mouse.y += (mouse.targetY - mouse.y) * 0.38;
 
       // Update & Draw Click Ripples
       for (let r = ripples.length - 1; r >= 0; r--) {

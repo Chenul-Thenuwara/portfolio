@@ -16,15 +16,10 @@ export default function CinematicCursor() {
   const mouseX = useMotionValue(-200);
   const mouseY = useMotionValue(-200);
 
-  // Hyper-responsive spring config — high stiffness and low mass for instant responsiveness without losing fluid physics
-  const springConfig = { stiffness: 1100, damping: 48, mass: 0.08 };
+  // Ultra-responsive spring config — instantaneous tracking (mass 0.01) with zero latency while preserving smooth hover animations
+  const springConfig = { stiffness: 2200, damping: 65, mass: 0.015 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
-
-  // Pinpoint accurate inner dot tracking for zero cursor delay
-  const dotSpringConfig = { stiffness: 1600, damping: 55, mass: 0.04 };
-  const dotX = useSpring(mouseX, dotSpringConfig);
-  const dotY = useSpring(mouseY, dotSpringConfig);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -50,9 +45,9 @@ export default function CinematicCursor() {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
+    window.addEventListener("mouseout", handleMouseOut, { passive: true });
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
     document.documentElement.addEventListener("mouseenter", handleMouseEnter);
 
@@ -127,12 +122,12 @@ export default function CinematicCursor() {
             </svg>
           </motion.div>
 
-          {/* Inner dot — tracks faster, sits at exact cursor pos */}
+          {/* Inner dot — 1:1 direct tracking without any spring delay */}
           <motion.div
             className="fixed top-0 left-0 z-[9999] pointer-events-none"
             style={{
-              x: dotX,
-              y: dotY,
+              x: mouseX,
+              y: mouseY,
               translateX: "-50%",
               translateY: "-50%",
             }}
