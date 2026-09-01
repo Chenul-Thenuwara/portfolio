@@ -162,7 +162,7 @@ export default function Certificates() {
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="mb-20 flex flex-col gap-4">
-          <span className="text-xs font-mono tracking-[0.25em] uppercase text-walnut-light/60">
+          <span className="text-xs font-mono tracking-[0.25em] uppercase text-walnut-accent font-semibold">
             ✦ Credentials
           </span>
           <h2
@@ -171,7 +171,7 @@ export default function Certificates() {
           >
             Certificates &amp; Courses
           </h2>
-          <p className="text-foreground/50 font-light max-w-lg text-base">
+          <p className="text-foreground/75 font-light max-w-lg text-base">
             Continuous learning across full-stack development, cloud, and computer science fundamentals.
           </p>
         </div>

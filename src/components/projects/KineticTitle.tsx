@@ -68,9 +68,8 @@ export default function KineticTitle() {
     <div
       ref={containerRef}
       className="relative max-w-7xl mx-auto w-full px-6 md:px-12 z-10 overflow-hidden mb-2"
-      aria-label={TEXT}
     >
-      <h2 className="text-5xl md:text-6xl font-black text-foreground flex">
+      <h2 className="text-5xl md:text-6xl font-black text-foreground flex" aria-label={TEXT}>
         {chars.map((char, i) => (
           <span
             key={i}

@@ -151,13 +151,13 @@ export default function ExperienceTimeline() {
       className="relative w-full py-36 flex flex-col items-center bg-[var(--background)] px-6 overflow-hidden"
     >
       <div className="z-10 text-center max-w-2xl mb-24">
-        <span className="text-xs font-mono tracking-[0.25em] uppercase text-walnut-light/80 block mb-3">
+        <span className="text-xs font-mono tracking-[0.25em] uppercase text-walnut-accent font-semibold block mb-3">
           ✦ Career &amp; Milestones
         </span>
         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
           Experience &amp; Leadership
         </h2>
-        <p className="text-foreground/50 font-light text-base mt-4">
+        <p className="text-foreground/75 font-light text-base mt-4">
           Professional industry delivery, open-source community leadership, and academic graduation.
         </p>
       </div>

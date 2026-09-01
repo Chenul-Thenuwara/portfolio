@@ -502,7 +502,7 @@ export default function ProjectCarousel() {
 
       {/* Navigation and instructions bar */}
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex items-center justify-between mt-2 mb-6 z-10">
-        <p className="text-xs font-mono text-foreground/50 flex items-center gap-2">
+        <p className="text-xs font-mono text-foreground/80 flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5 text-walnut-light" />
           <span>Scroll horizontally or click any project to view full architectural details &amp; gallery</span>
         </p>
