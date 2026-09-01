@@ -63,6 +63,63 @@ export const metadata: Metadata = {
   },
 };
 
+const personSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.chenul-thenuwara.tech/#person",
+      name: "Chenul Dulmika Thenuwara",
+      alternateName: ["Chenul Thenuwara", "Chenul"],
+      jobTitle: "Full-Stack Software Developer",
+      description:
+        "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University and Plymouth University (UK). Specializing in React, Next.js, TypeScript, Node.js, Electron, and local streaming systems.",
+      url: "https://www.chenul-thenuwara.tech",
+      image: "https://www.chenul-thenuwara.tech/images/profile.jpg",
+      sameAs: [
+        "https://github.com/Chenul-Thenuwara",
+        "https://www.linkedin.com/in/chenul-thenuwara",
+      ],
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "NSBM Green University",
+          url: "https://www.nsbm.ac.lk",
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "University of Plymouth",
+          url: "https://www.plymouth.ac.uk",
+        },
+      ],
+      knowsAbout: [
+        "Software Engineering",
+        "Full-Stack Web Development",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "Electron",
+        "Enterprise Architecture",
+      ],
+      nationality: {
+        "@type": "Country",
+        name: "Sri Lanka",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.chenul-thenuwara.tech/#website",
+      url: "https://www.chenul-thenuwara.tech",
+      name: "Chenul Dulmika Thenuwara Portfolio",
+      publisher: {
+        "@id": "https://www.chenul-thenuwara.tech/#person",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -73,6 +130,12 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         {/* Client-only: film grain overlay + custom cursor */}
         <ClientShell />
