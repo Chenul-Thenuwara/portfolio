@@ -1,292 +1,208 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import HeroBackgroundCanvas from "./HeroBackgroundCanvas";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Mouse position tracking with smooth spring physics
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 36, stiffness: 650, mass: 0.1 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  // Parallax shifts for side ambient light orbs
-  const leftOrbX = useTransform(smoothX, [0, 1920], [-35, 35]);
-  const leftOrbY = useTransform(smoothY, [0, 1080], [-25, 25]);
-  const rightOrbX = useTransform(smoothX, [0, 1920], [35, -35]);
-  const rightOrbY = useTransform(smoothY, [0, 1080], [25, -25]);
-
-  // Scroll parallax for content: scrolls up smoothly and fades gracefully without cutting off
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
-  // Spotlight opacity that smoothly fades to 0 as the mouse nears the bottom
-  const spotlightOpacity = useTransform(smoothY, (yVal) => {
-    const h = typeof window !== "undefined" ? window.innerHeight : 900;
-    if (yVal > h - 300) {
-      return Math.max(0, 1 - (yVal - (h - 300)) / 220);
-    }
-    return 1;
-  });
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set(rect.width / 2);
-    mouseY.set(rect.height / 2);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const r = containerRef.current.getBoundingClientRect();
-      mouseX.set(e.clientX - r.left);
-      mouseY.set(e.clientY - r.top);
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!containerRef.current || !e.touches[0]) return;
-      const r = containerRef.current.getBoundingClientRect();
-      mouseX.set(e.touches[0].clientX - r.left);
-      mouseY.set(e.touches[0].clientY - r.top);
-    };
-
-    const section = containerRef.current;
-    if (section) {
-      section.addEventListener("mousemove", handleMouseMove);
-      section.addEventListener("touchstart", handleTouchMove, { passive: true });
-      section.addEventListener("touchmove", handleTouchMove, { passive: true });
-    }
-    return () => {
-      if (section) {
-        section.removeEventListener("mousemove", handleMouseMove);
-        section.removeEventListener("touchstart", handleTouchMove);
-        section.removeEventListener("touchmove", handleTouchMove);
-      }
-    };
-  }, [mouseX, mouseY]);
-
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[92vh] sm:min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[var(--background)] pt-24 sm:pt-28 pb-6 sm:pb-10 cursor-default"
+      className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-[var(--background)] pt-24 sm:pt-28 pb-12 sm:pb-16 px-6 md:px-12 border-b border-[var(--card-border)]"
     >
-      {/* ── Atmospheric Background Layer with Soft Bottom Dissolve (Zero Line Separation) ── */}
+      {/* Subtle architectural background canvas */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-45"
         style={{
-          maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 88%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 88%)",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 60%, transparent 95%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 60%, transparent 95%)",
         }}
       >
-        {/* ── 1. Interactive Physics Particle & Constellation Canvas ── */}
         <HeroBackgroundCanvas />
-
-        {/* ── 2. Interactive Mouse Spotlight Glow with Dynamic Bottom Fade ── */}
-        <motion.div
-          className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
-          style={{
-            opacity: spotlightOpacity,
-            background: useTransform(
-              [mouseX, mouseY],
-              ([x, y]) =>
-                `radial-gradient(750px circle at ${x}px ${y}px, var(--hero-spotlight-start, rgba(93, 64, 55, 0.25)), var(--hero-spotlight-mid, rgba(59, 130, 246, 0.08)) 45%, transparent 75%)`
-            ),
-          }}
-        />
-
-        {/* ── 3. Atmospheric Side Glow Orbs with Parallax ── */}
-        <motion.div
-          style={{ x: leftOrbX, y: leftOrbY }}
-          animate={{
-            scale: [1, 1.12, 1],
-            opacity: [0.35, 0.55, 0.35],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 -left-32 w-72 md:w-[550px] h-72 md:h-[550px] bg-walnut/30 rounded-full blur-[60px] md:blur-[130px] will-change-transform"
-        />
-
-        <motion.div
-          style={{ x: rightOrbX, y: rightOrbY }}
-          animate={{
-            scale: [1, 1.18, 1],
-            opacity: [0.25, 0.45, 0.25],
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-1/4 -right-32 w-72 md:w-[620px] h-72 md:h-[620px] bg-blue-900/15 rounded-full blur-[60px] md:blur-[150px] will-change-transform"
-        />
       </div>
 
-      {/* ── 4. Side Engineering Telemetry & Accents ── */}
-      {/* Left side telemetry */}
-      <div className="pointer-events-none absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-6 text-[10px] font-mono tracking-widest text-foreground/25 select-none z-10">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500/80 animate-ping" />
-          <span>PORTFOLIO // V2.6</span>
-        </div>
-        <div className="w-px h-28 bg-gradient-to-b from-white/10 via-walnut-light/40 to-transparent" />
-        <span className="rotate-90 origin-left translate-y-10 text-foreground/20">
-          LAT 6.9271° N · SRI LANKA
-        </span>
-      </div>
-
-      {/* Right side telemetry */}
-      <div className="pointer-events-none absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-end gap-6 text-[10px] font-mono tracking-widest text-foreground/25 select-none z-10">
-        <div className="flex items-center gap-2">
-          <span>NEXT 16 · REACT 19</span>
-          <span className="w-2 h-2 rounded-full bg-walnut-light/80" />
-        </div>
-        <div className="w-px h-28 bg-gradient-to-b from-white/10 via-blue-500/40 to-transparent" />
-        <span className="-rotate-90 origin-right translate-y-10 text-foreground/20">
-          ENTERPRISE ARCHITECTURE
-        </span>
-      </div>
-
-
-
-      {/* Content */}
-      <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-5xl"
-      >
-        {/* Profile Avatar */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col justify-between gap-10">
+        {/* Top Editorial Metadata Bar */}
         <motion.div
-          initial={{ scale: 0.85, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.05, ease: [0.215, 0.61, 0.355, 1] }}
-          className="relative mb-5 group"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full py-3 border-y border-[var(--card-border)] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-foreground/70"
         >
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-walnut-light via-foreground/20 to-walnut blur-md opacity-60 group-hover:opacity-100 transition duration-500" />
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl bg-black">
-            <Image
-              src="/images/profile.jpg"
-              alt="Chenul Dulmika Thenuwara"
-              width={140}
-              height={140}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 640px) 112px, 128px"
-              className="w-full h-full object-cover object-[50%_18%] scale-105 group-hover:scale-110 transition duration-500"
-            />
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+            <span className="text-foreground font-medium">
+              Associate Software Engineer
+            </span>
+            <span className="text-foreground/35">/</span>
+            <span>Anunine Holdings</span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-6 text-foreground/55">
+            <span>BSc (Hons) Software Engineering · First Class</span>
+            <span className="text-foreground/25">|</span>
+            <span>Colombo, Sri Lanka</span>
           </div>
         </motion.div>
 
-        {/* Status Badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-6"
-        >
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider bg-walnut/40 text-foreground/90 border border-walnut-light/30 backdrop-blur-md">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        {/* Main Asymmetric Editorial Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center my-auto py-4">
+          {/* Left Column: Typography & Statement (8 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-8 flex flex-col items-start text-left"
+          >
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent mb-4">
+              Full-Stack Software Engineer &amp; System Architect
             </span>
-            Associate Software Engineer @ Anunine Holdings
-          </span>
 
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono tracking-wider bg-white/5 text-foreground/70 border border-white/10 backdrop-blur-md">
-            📍 Sri Lanka
-          </span>
-        </motion.div>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em] text-foreground leading-[1.04] mb-6">
+              Chenul Dulmika
+              <br />
+              Thenuwara.
+            </h1>
 
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4">
-          Chenul Dulmika <br className="hidden sm:block" />
-          Thenuwara
-        </h1>
+            <p className="text-base sm:text-lg text-foreground/75 font-normal max-w-2xl leading-relaxed mb-8">
+              Architecting multi-tenant enterprise platforms, cross-platform desktop applications, and high-throughput local network systems. Promoted to{" "}
+              <span className="text-foreground font-medium">
+                Associate Software Engineer at Anunine Holdings
+              </span>{" "}
+              and graduating with{" "}
+              <span className="text-foreground font-medium">
+                First Class Honours in BSc (Hons) Software Engineering
+              </span>{" "}
+              from the University of Plymouth (UK) &amp; NSBM Green University.
+            </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-          className="text-xl sm:text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/85 to-walnut-accent mb-4"
-        >
-          Full-Stack Software Developer
-        </motion.div>
+            {/* Structured Action Row */}
+            <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-xs font-mono uppercase tracking-wider font-medium bg-foreground text-[var(--background)] hover:opacity-90 transition-opacity"
+              >
+                <span>Selected Works</span>
+                <ArrowDownRight className="w-3.5 h-3.5" />
+              </a>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.45, ease: [0.215, 0.61, 0.355, 1] }}
-          className="text-base sm:text-lg text-foreground/75 font-light max-w-2xl leading-relaxed mb-8"
-        >
-          BSc (Hons) Software Engineering Graduate{" "}
-          <span className="text-walnut-light font-medium">(First Class Honours · Graduating Dec 2026)</span>{" "}
-          from <span className="text-foreground font-medium">NSBM Green University</span> in partnership with{" "}
-          <span className="text-foreground font-medium">University of Plymouth (UK)</span>.
-          Specializing in scalable web ecosystems, cross-platform desktop software, and local-network streaming architectures.
-        </motion.p>
+              <a
+                href="#experience"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md text-xs font-mono uppercase tracking-wider text-foreground border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-foreground/30 transition-colors"
+              >
+                <span>Experience</span>
+              </a>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto"
-        >
-          <a
-            href="#projects"
-            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-foreground text-[var(--background)] hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-[0_0_25px_rgba(184,138,106,0.25)]"
+              <a
+                href="#certificates"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md text-xs font-mono uppercase tracking-wider text-foreground/80 border border-[var(--card-border)] hover:border-foreground/30 hover:text-foreground transition-colors"
+              >
+                <span>Credentials</span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Architectural Portrait Frame (4 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-4 w-full max-w-xs sm:max-w-sm mx-auto lg:ml-auto lg:mr-0"
           >
-            Explore Projects
-          </a>
-          <a
-            href="#experience"
-            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-walnut/15 border border-[var(--card-border)] text-foreground hover:bg-walnut/30 hover:border-walnut-light/60 transition-all duration-300 backdrop-blur-sm"
-          >
-            Experience
-          </a>
-          <a
-            href="#certificates"
-            className="w-full sm:w-48 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center justify-center text-center bg-walnut/30 border border-walnut-light/40 text-foreground/90 hover:bg-walnut/50 transition-all duration-300 backdrop-blur-sm"
-          >
-            Credentials
-          </a>
-        </motion.div>
-        {/* Scroll indicator */}
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card-bg-solid)] p-3">
+              <div className="relative aspect-[4/4.6] w-full rounded overflow-hidden bg-black border border-[var(--card-border)]">
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Chenul Dulmika Thenuwara"
+                  fill
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 640px) 280px, 340px"
+                  className="object-cover object-[50%_18%]"
+                />
+              </div>
+
+              <div className="pt-3 mt-3 border-t border-[var(--card-border)] flex items-center justify-between text-[11px] font-mono text-foreground/60">
+                <div>
+                  <p className="text-foreground font-medium">CHENUL THENUWARA</p>
+                  <p className="text-foreground/50">ASSOC. SOFTWARE ENGINEER</p>
+                </div>
+                <a
+                  href="https://www.linkedin.com/in/chenul-thenuwara"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded border border-[var(--card-border)] hover:border-foreground/30 text-foreground/75 hover:text-foreground transition-colors"
+                >
+                  <span>Profile</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom Architectural Metrics Bar */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
-          className="mt-8 sm:mt-10 flex flex-col items-center gap-2 pointer-events-none"
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="w-full pt-6 border-t border-[var(--card-border)] grid grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-foreground/40">
-            Scroll
-          </span>
-          <div className="w-[1px] h-10 bg-foreground/20 overflow-hidden relative">
-            <motion.div
-              animate={{
-                y: ["-100%", "100%"],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="absolute top-0 left-0 w-full h-full bg-walnut-light"
-            />
+          <div className="flex flex-col gap-1">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-foreground/45">
+              01 / Current Role
+            </span>
+            <span className="text-sm sm:text-base font-semibold text-foreground">
+              Associate Software Engineer
+            </span>
+            <span className="text-xs text-foreground/55">
+              Anunine Holdings · Promoted Oct 2026
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-foreground/45">
+              02 / Enterprise Scope
+            </span>
+            <span className="text-sm sm:text-base font-semibold text-foreground">
+              10 Subsidiaries &amp; 5 Portals
+            </span>
+            <span className="text-xs text-foreground/55">
+              Sole architect of group-wide ITSM &amp; Asset ERP
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-foreground/45">
+              03 / Academic Standing
+            </span>
+            <span className="text-sm sm:text-base font-semibold text-foreground">
+              First Class Honours
+            </span>
+            <span className="text-xs text-foreground/55">
+              University of Plymouth (UK) · BSc (Hons) SE
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-foreground/45">
+              04 / Core Stack
+            </span>
+            <span className="text-sm sm:text-base font-semibold text-foreground">
+              Next.js 16 · React 19 · TS
+            </span>
+            <span className="text-xs text-foreground/55">
+              Node.js, Electron, Firebase &amp; MongoDB
+            </span>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

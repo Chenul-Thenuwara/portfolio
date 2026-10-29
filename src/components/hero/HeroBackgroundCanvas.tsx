@@ -40,7 +40,7 @@ export default function HeroBackgroundCanvas() {
 
     let particles: Particle[] = [];
     const ripples: WaveRipple[] = [];
-    const colors = ["#8d6e63", "#d7ccc8", "#3b82f6", "#10b981", "#e6e0d4"];
+    const colors = ["#8d6e63", "#a38472", "#d7ccc8", "#b8aca3", "#e6e0d4"];
 
     const mouse = {
       x: 0,
@@ -281,7 +281,7 @@ export default function HeroBackgroundCanvas() {
           haloGrad.addColorStop(1, "transparent");
         } else {
           haloGrad.addColorStop(0, `rgba(93, 64, 55, ${haloAlpha})`);
-          haloGrad.addColorStop(0.5, `rgba(59, 130, 246, ${haloAlpha * 0.35})`);
+          haloGrad.addColorStop(0.5, `rgba(62, 39, 35, ${haloAlpha * 0.25})`);
           haloGrad.addColorStop(1, "transparent");
         }
         ctx.fillStyle = haloGrad;

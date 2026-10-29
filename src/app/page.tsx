@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
 import Hero from "@/components/hero/Hero";
 import ExperienceTimeline from "@/components/timeline/ExperienceTimeline";
@@ -16,68 +17,95 @@ export default function Home() {
       <ExperienceTimeline />
       <Certificates />
 
-      {/* Modern Footer */}
-      <footer className="w-full py-20 px-6 flex flex-col items-center gap-6 text-center border-t border-[var(--card-border)] bg-[var(--deep-dark)] relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-walnut/10 blur-3xl pointer-events-none" />
-        
-        <div className="flex flex-col items-center gap-3 z-10">
-          <div className="w-14 h-14 rounded-full overflow-hidden border border-walnut-light/40 shadow-[0_0_20px_rgba(184,138,106,0.2)] bg-black/60">
-            <Image
-              src="/images/logo.png"
-              alt="Chenul Dulmika Thenuwara"
-              width={56}
-              height={56}
-              className="w-full h-full object-cover"
-            />
+      {/* Architectural Editorial Footer */}
+      <footer className="w-full py-16 px-6 md:px-12 border-t border-[var(--card-border)] bg-[var(--deep-dark)]">
+        <div className="max-w-7xl mx-auto w-full flex flex-col gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            {/* Brand & Identity */}
+            <div className="md:col-span-6 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-md overflow-hidden border border-[var(--card-border)] bg-[var(--card-bg-solid)]">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Chenul Dulmika Thenuwara"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-foreground tracking-tight">
+                    Chenul Dulmika Thenuwara
+                  </h3>
+                  <p className="text-xs font-mono text-foreground/55">
+                    Associate Software Engineer · Anunine Holdings
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-foreground/60 max-w-md mt-1 leading-relaxed">
+                BSc (Hons) Software Engineering Graduate (First Class Honours) — University of Plymouth (UK) &amp; NSBM Green University.
+              </p>
+            </div>
+
+            {/* Section Index */}
+            <div className="md:col-span-3 flex flex-col gap-2 text-xs font-mono">
+              <span className="text-foreground/40 uppercase tracking-wider mb-1">
+                Navigation
+              </span>
+              <a
+                href="#projects"
+                className="text-foreground/70 hover:text-foreground transition-colors"
+              >
+                01 / Selected Works
+              </a>
+              <a
+                href="#experience"
+                className="text-foreground/70 hover:text-foreground transition-colors"
+              >
+                02 / Experience &amp; Education
+              </a>
+              <a
+                href="#certificates"
+                className="text-foreground/70 hover:text-foreground transition-colors"
+              >
+                03 / Verified Credentials
+              </a>
+            </div>
+
+            {/* External Profiles */}
+            <div className="md:col-span-3 flex flex-col gap-2 text-xs font-mono">
+              <span className="text-foreground/40 uppercase tracking-wider mb-1">
+                Profiles
+              </span>
+              <a
+                href="https://github.com/Chenul-Thenuwara"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-foreground/70 hover:text-foreground transition-colors"
+              >
+                <span>GitHub</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chenul-thenuwara"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-foreground/70 hover:text-foreground transition-colors"
+              >
+                <span>LinkedIn</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
           </div>
-          <p className="text-foreground/40 text-xs tracking-[0.25em] font-mono uppercase">
-            Full-Stack Software Developer
-          </p>
-          <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            Chenul Dulmika Thenuwara
-          </h3>
-          <p className="text-foreground/60 text-xs sm:text-sm font-light max-w-md mt-1">
-            BSc (Hons) Software Engineering Graduate · NSBM Green University &amp; Plymouth University (UK)
-          </p>
-        </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-foreground/70 z-10 pt-2">
-          <a
-            href="https://github.com/Chenul-Thenuwara"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground underline decoration-walnut-light underline-offset-4 transition-colors"
-          >
-            GitHub
-          </a>
-          <span>•</span>
-          <a
-            href="#projects"
-            className="hover:text-foreground underline decoration-walnut-light underline-offset-4 transition-colors"
-          >
-            Projects
-          </a>
-          <span>•</span>
-          <a
-            href="#experience"
-            className="hover:text-foreground underline decoration-walnut-light underline-offset-4 transition-colors"
-          >
-            Experience
-          </a>
-          <span>•</span>
-          <a
-            href="#certificates"
-            className="hover:text-foreground underline decoration-walnut-light underline-offset-4 transition-colors"
-          >
-            Credentials
-          </a>
+          <div className="pt-8 border-t border-[var(--card-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-foreground/40">
+            <p>
+              &copy; {new Date().getFullYear()} Chenul Dulmika Thenuwara. All rights reserved.
+            </p>
+            <p>Colombo, Sri Lanka · Next.js 16 &amp; React 19</p>
+          </div>
         </div>
-
-        <p className="text-foreground/30 text-xs font-mono z-10 pt-4 border-t border-[var(--card-border)] w-full max-w-md">
-          &copy; {new Date().getFullYear()} Chenul Dulmika Thenuwara — Engineered for Performance
-        </p>
       </footer>
     </main>
   );
 }
-
