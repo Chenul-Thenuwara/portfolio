@@ -24,13 +24,14 @@ export default function Home() {
             {/* Brand & Identity */}
             <div className="sm:col-span-2 md:col-span-6 flex flex-col gap-3">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-md overflow-hidden border border-[var(--card-border)] bg-[var(--card-bg-solid)]">
+                <div className="w-10 h-10 flex-shrink-0">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/logo-v2.png"
                     alt="Chenul Dulmika Thenuwara"
-                    width={36}
-                    height={36}
-                    className="w-full h-full object-cover"
+                    width={40}
+                    height={40}
+                    unoptimized
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div>

@@ -31,23 +31,24 @@ export default function Navbar() {
         <a
           href="#"
           onClick={() => setMobileMenuOpen(false)}
-          className="flex items-center gap-2.5 sm:gap-3 group text-foreground tracking-tight min-w-0"
+          className="flex items-center gap-2.5 sm:gap-3 group text-foreground tracking-tight"
         >
-          <div className="relative w-7 h-7 rounded-md overflow-hidden border border-[var(--card-border)] bg-[var(--card-bg-solid)] flex-shrink-0">
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0">
             <Image
-              src="/images/logo.png"
+              src="/images/logo-v2.png"
               alt="Chenul Thenuwara"
-              width={28}
-              height={28}
+              width={36}
+              height={36}
               priority
-              className="w-full h-full object-cover"
+              unoptimized
+              className="w-full h-full object-contain"
             />
           </div>
-          <div className="flex items-center gap-2 truncate">
-            <span className="font-semibold text-sm text-foreground tracking-tight truncate">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-sm text-foreground tracking-tight whitespace-nowrap">
               Chenul Thenuwara
             </span>
-            <span className="hidden lg:inline text-xs font-mono text-foreground/40">
+            <span className="hidden lg:inline text-xs font-mono text-foreground/40 whitespace-nowrap">
               / Software Engineer
             </span>
           </div>
