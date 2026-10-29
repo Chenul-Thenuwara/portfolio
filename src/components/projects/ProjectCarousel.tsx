@@ -67,7 +67,7 @@ const projects: ProjectItem[] = [
       "Multi-Tenancy",
       "RBAC",
     ],
-    coverImage: "/images/projects/enterprise/enterprise-05-it-overview.png",
+    coverImage: "/images/projects/enterprise/enterprise-01-login.png",
     gallery: [
       {
         src: "/images/projects/enterprise/enterprise-01-login.png",
@@ -243,7 +243,7 @@ const projects: ProjectItem[] = [
       "REST APIs",
       "Tailwind CSS",
     ],
-    coverImage: "/images/projects/media-server-06-home.png",
+    coverImage: "/images/projects/media-server-01-welcome.png",
     gallery: [
       {
         src: "/images/projects/media-server-01-welcome.png",
