@@ -18,11 +18,11 @@ export default function Home() {
       <Certificates />
 
       {/* Architectural Editorial Footer */}
-      <footer className="w-full py-16 px-6 md:px-12 border-t border-[var(--card-border)] bg-[var(--deep-dark)]">
-        <div className="max-w-7xl mx-auto w-full flex flex-col gap-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <footer className="w-full py-12 sm:py-16 px-4 sm:px-6 md:px-12 border-t border-[var(--card-border)] bg-[var(--deep-dark)]">
+        <div className="max-w-7xl mx-auto w-full flex flex-col gap-10 sm:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 items-start">
             {/* Brand & Identity */}
-            <div className="md:col-span-6 flex flex-col gap-3">
+            <div className="sm:col-span-2 md:col-span-6 flex flex-col gap-3">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-md overflow-hidden border border-[var(--card-border)] bg-[var(--card-bg-solid)]">
                   <Image

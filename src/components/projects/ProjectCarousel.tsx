@@ -540,21 +540,21 @@ export default function ProjectCarousel() {
   return (
     <section
       id="projects"
-      className="relative w-full py-24 md:py-32 bg-[var(--background)] overflow-hidden"
+      className="relative w-full py-16 sm:py-24 md:py-32 bg-[var(--background)] overflow-hidden"
     >
       {/* Section Header */}
-      <div className="max-w-7xl mx-auto w-full px-6 md:px-12 mb-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[var(--card-border)]">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 mb-8 sm:mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-[var(--card-border)]">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent block mb-3">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent block mb-2.5 sm:mb-3">
               01 / Selected Works
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-foreground">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] text-foreground">
               Featured Systems &amp; Architecture
             </h2>
           </div>
 
-          <div className="flex items-center justify-between md:justify-end gap-6">
+          <div className="flex items-center justify-between md:justify-end gap-4 sm:gap-6">
             <p className="text-xs font-mono text-foreground/55 max-w-xs">
               Select any case study to inspect architectural specifications and system interfaces.
             </p>
@@ -584,21 +584,21 @@ export default function ProjectCarousel() {
       {/* Horizontal Case Study Track */}
       <div
         ref={scrollRef}
-        className="flex items-stretch gap-6 overflow-x-auto no-scrollbar px-6 md:px-12 pb-4 snap-x snap-mandatory scroll-smooth z-10"
+        className="flex items-stretch gap-4 sm:gap-6 overflow-x-auto no-scrollbar px-4 sm:px-6 md:px-12 pb-4 snap-x snap-mandatory scroll-smooth z-10"
       >
         {projects.map((project, idx) => (
           <article
             key={project.id}
             onClick={() => openProjectModal(project)}
-            className="group relative w-[86vw] sm:w-[440px] md:w-[500px] lg:w-[540px] rounded-lg cursor-pointer overflow-hidden shrink-0 border border-[var(--card-border)] bg-[var(--card-bg-solid)] snap-start hover:border-[var(--card-border-hover)] transition-colors duration-300 flex flex-col justify-between"
+            className="group relative w-[88vw] sm:w-[440px] md:w-[500px] lg:w-[540px] rounded-lg cursor-pointer overflow-hidden shrink-0 border border-[var(--card-border)] bg-[var(--card-bg-solid)] snap-start hover:border-[var(--card-border-hover)] transition-colors duration-300 flex flex-col justify-between"
           >
             {/* Top Index & Meta Bar */}
-            <div className="px-5 py-3.5 border-b border-[var(--card-border)] flex items-center justify-between gap-3 text-xs font-mono">
-              <div className="flex items-center gap-2.5 truncate">
-                <span className="text-walnut-accent font-medium">
+            <div className="px-4 sm:px-5 py-3 sm:py-3.5 border-b border-[var(--card-border)] flex items-center justify-between gap-2.5 text-xs font-mono">
+              <div className="flex items-center gap-2 truncate min-w-0">
+                <span className="text-walnut-accent font-medium shrink-0">
                   {project.index}
                 </span>
-                <span className="text-foreground/25">/</span>
+                <span className="text-foreground/25 shrink-0">/</span>
                 <span className="text-foreground/75 truncate">
                   {project.badge}
                 </span>
@@ -616,12 +616,12 @@ export default function ProjectCarousel() {
                   src={project.coverImage}
                   alt={project.title}
                   fill
-                  sizes="(max-width: 768px) 86vw, 540px"
+                  sizes="(max-width: 768px) 88vw, 540px"
                   className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                   priority={idx < 2}
                 />
               ) : (
-                <div className="absolute inset-0 flex flex-col justify-between p-6 bg-[var(--deep-dark)]">
+                <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 bg-[var(--deep-dark)]">
                   <div
                     className="absolute inset-0 opacity-15 pointer-events-none"
                     style={{
@@ -630,33 +630,35 @@ export default function ProjectCarousel() {
                       backgroundSize: "32px 32px",
                     }}
                   />
-                  <div className="relative z-10 flex items-center justify-between text-[11px] font-mono text-foreground/40">
+                  <div className="relative z-10 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-foreground/40">
                     <span>ARCH // SPECIFICATION</span>
                     <span>{project.id.toUpperCase()}</span>
                   </div>
                   <div className="relative z-10 my-auto">
-                    <p className="text-xs font-mono uppercase tracking-widest text-walnut-accent mb-1">
+                    <p className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-walnut-accent mb-1">
                       System Architecture
                     </p>
-                    <p className="text-xl font-bold text-foreground tracking-tight">
+                    <p className="text-lg sm:text-xl font-bold text-foreground tracking-tight">
                       {project.title}
                     </p>
                   </div>
-                  <div className="relative z-10 flex items-center justify-between text-[11px] font-mono text-foreground/45 border-t border-[var(--card-border)] pt-3">
-                    <span>{project.role}</span>
-                    <span>{project.tech.slice(0, 3).join(" · ")}</span>
+                  <div className="relative z-10 flex items-center justify-between gap-2 text-[10px] sm:text-[11px] font-mono text-foreground/45 border-t border-[var(--card-border)] pt-2.5 sm:pt-3 truncate">
+                    <span className="truncate">{project.role}</span>
+                    <span className="shrink-0">
+                      {project.tech.slice(0, 2).join(" · ")}
+                    </span>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Specification Body */}
-            <div className="p-6 flex flex-col justify-between flex-1 gap-5">
+            <div className="p-4 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
               <div>
                 <p className="text-xs font-mono text-walnut-light mb-1.5">
                   {project.role}
                 </p>
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-2.5 group-hover:text-walnut-accent transition-colors">
+                <h3 className="text-lg sm:text-2xl font-bold text-foreground tracking-tight mb-2 group-hover:text-walnut-accent transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-foreground/70 text-xs sm:text-sm leading-relaxed line-clamp-3">
@@ -665,18 +667,18 @@ export default function ProjectCarousel() {
               </div>
 
               {/* Clean Rectangular Monospace Tags */}
-              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--card-border)]">
-                {project.tech.slice(0, 6).map((t) => (
+              <div className="flex flex-wrap gap-1.5 pt-3.5 sm:pt-4 border-t border-[var(--card-border)]">
+                {project.tech.slice(0, 5).map((t) => (
                   <span
                     key={t}
-                    className="text-[11px] font-mono px-2 py-0.5 rounded border border-[var(--card-border)] text-foreground/70 bg-[var(--card-bg)]"
+                    className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded border border-[var(--card-border)] text-foreground/70 bg-[var(--card-bg)]"
                   >
                     {t}
                   </span>
                 ))}
-                {project.tech.length > 6 && (
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded border border-[var(--card-border)] text-foreground/45">
-                    +{project.tech.length - 6}
+                {project.tech.length > 5 && (
+                  <span className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded border border-[var(--card-border)] text-foreground/45">
+                    +{project.tech.length - 5}
                   </span>
                 )}
               </div>
@@ -689,7 +691,7 @@ export default function ProjectCarousel() {
       <AnimatePresence>
         {activeProject && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 overflow-hidden"
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2 sm:p-6 md:p-10 overflow-hidden"
             data-lenis-prevent="true"
           >
             {/* Backdrop */}
@@ -708,60 +710,63 @@ export default function ProjectCarousel() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-5xl h-auto max-h-[90vh] bg-[var(--card-bg-solid)] border border-[var(--card-border)] rounded-lg shadow-2xl overflow-y-auto no-scrollbar z-10 text-foreground flex flex-col overscroll-contain"
+              className="relative w-full max-w-5xl h-auto max-h-[92dvh] sm:max-h-[90vh] bg-[var(--card-bg-solid)] border border-[var(--card-border)] rounded-lg shadow-2xl overflow-y-auto no-scrollbar z-10 text-foreground flex flex-col overscroll-contain"
               data-lenis-prevent="true"
               onWheel={(e) => {
                 e.stopPropagation();
               }}
             >
               {/* Modal Top Bar */}
-              <div className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-8 py-4 bg-[var(--card-bg-solid)]/95 backdrop-blur-md border-b border-[var(--card-border)]">
-                <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
-                  <span className="text-walnut-accent font-semibold">
+              <div className="sticky top-0 z-30 flex items-center justify-between gap-2 px-4 sm:px-8 py-3.5 sm:py-4 bg-[var(--card-bg-solid)]/95 backdrop-blur-md border-b border-[var(--card-border)]">
+                <div className="flex items-center gap-2 text-xs font-mono min-w-0 truncate">
+                  <span className="text-walnut-accent font-semibold shrink-0">
                     {activeProject.index}
                   </span>
-                  <span className="text-foreground/30">/</span>
-                  <span className="text-foreground font-medium">
+                  <span className="text-foreground/30 shrink-0">/</span>
+                  <span className="text-foreground font-medium truncate">
                     {activeProject.badge}
                   </span>
-                  <span className="hidden sm:inline text-foreground/30">·</span>
-                  <span className="hidden sm:inline text-foreground/60">
+                  <span className="hidden md:inline text-foreground/30 shrink-0">
+                    ·
+                  </span>
+                  <span className="hidden md:inline text-foreground/60 truncate">
                     {activeProject.role}
                   </span>
                 </div>
 
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[var(--card-border)] hover:border-foreground/30 text-xs font-mono text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:py-1 rounded border border-[var(--card-border)] hover:border-foreground/30 text-xs font-mono text-foreground/70 hover:text-foreground transition-colors cursor-pointer shrink-0"
                   aria-label="Close modal"
                 >
-                  <span>ESC</span>
+                  <span className="hidden sm:inline">ESC</span>
+                  <span className="sm:hidden">Close</span>
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Modal Body */}
-              <div className="p-6 sm:p-8 space-y-10">
+              <div className="p-4 sm:p-8 space-y-8 sm:space-y-10">
                 {/* Title & Overview */}
                 <div>
-                  <h2 className="text-2xl sm:text-4xl font-bold text-foreground tracking-tight">
+                  <h2 className="text-xl sm:text-4xl font-bold text-foreground tracking-tight">
                     {activeProject.title}
                   </h2>
-                  <p className="text-foreground/75 text-sm sm:text-base leading-relaxed mt-3 max-w-3xl">
+                  <p className="text-foreground/75 text-xs sm:text-base leading-relaxed mt-2.5 sm:mt-3 max-w-3xl">
                     {activeProject.longDesc || activeProject.desc}
                   </p>
                 </div>
 
                 {/* ── System Interface Gallery ── */}
                 {activeProject.gallery && activeProject.gallery.length > 0 && (
-                  <div className="space-y-4">
-                    <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--card-border)]">
-                      <div className="flex items-center gap-3">
-                        <h3 className="text-xs font-mono uppercase tracking-[0.18em] text-walnut-accent">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                        <h3 className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.16em] sm:tracking-[0.18em] text-walnut-accent">
                           01 / System Interface Gallery
                         </h3>
                         {activeProject.gallery[activeImageIdx].category && (
-                          <span className="text-[11px] font-mono px-2 py-0.5 rounded border border-[var(--card-border)] text-foreground/75 bg-[var(--card-bg)]">
+                          <span className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded border border-[var(--card-border)] text-foreground/75 bg-[var(--card-bg)]">
                             {activeProject.gallery[activeImageIdx].category}
                           </span>
                         )}
@@ -800,10 +805,10 @@ export default function ProjectCarousel() {
                       </div>
                     </div>
 
-                    {/* Image Stage */}
+                    {/* Image Stage — Responsive Aspect Ratio on Mobile */}
                     <div className="flex flex-col gap-3">
                       <div
-                        className="relative w-full h-[48vh] sm:h-[58vh] max-h-[580px] rounded-md overflow-hidden border border-[var(--card-border)] bg-[#070706] flex items-center justify-center group select-none"
+                        className="relative w-full aspect-[16/10] sm:aspect-auto sm:h-[58vh] max-h-[580px] rounded-md overflow-hidden border border-[var(--card-border)] bg-[#070706] flex items-center justify-center group select-none"
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                       >
@@ -830,7 +835,7 @@ export default function ProjectCarousel() {
                               src={activeProject.gallery[activeImageIdx].src}
                               alt={activeProject.gallery[activeImageIdx].title}
                               fill
-                              className="object-contain p-2 sm:p-4"
+                              className="object-contain p-1 sm:p-4"
                               priority
                             />
                           </motion.div>
@@ -845,7 +850,7 @@ export default function ProjectCarousel() {
                                 activeProject.gallery!.length
                             );
                           }}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-md bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/15 transition-colors cursor-pointer z-20"
+                          className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/15 transition-colors cursor-pointer z-20"
                           aria-label="Previous image"
                         >
                           <ChevronLeft className="w-4 h-4" />
@@ -859,7 +864,7 @@ export default function ProjectCarousel() {
                                 (prev + 1) % activeProject.gallery!.length
                             );
                           }}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-md bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/15 transition-colors cursor-pointer z-20"
+                          className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/15 transition-colors cursor-pointer z-20"
                           aria-label="Next image"
                         >
                           <ChevronRight className="w-4 h-4" />
@@ -867,12 +872,12 @@ export default function ProjectCarousel() {
                       </div>
 
                       {/* Caption Bar */}
-                      <div className="p-4 rounded-md bg-[var(--card-bg)] border border-[var(--card-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="p-3.5 sm:p-4 rounded-md bg-[var(--card-bg)] border border-[var(--card-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div>
-                          <h4 className="text-sm font-semibold text-foreground">
+                          <h4 className="text-xs sm:text-sm font-semibold text-foreground">
                             {activeProject.gallery[activeImageIdx].title}
                           </h4>
-                          <p className="text-xs text-foreground/70 mt-0.5">
+                          <p className="text-xs text-foreground/70 mt-0.5 leading-relaxed">
                             {activeProject.gallery[activeImageIdx].description}
                           </p>
                         </div>
@@ -884,15 +889,15 @@ export default function ProjectCarousel() {
                 {/* ── Key Architectural Highlights ── */}
                 {activeProject.highlights &&
                   activeProject.highlights.length > 0 && (
-                    <div className="space-y-4 pt-6 border-t border-[var(--card-border)]">
-                      <h3 className="text-xs font-mono uppercase tracking-[0.18em] text-walnut-accent">
+                    <div className="space-y-3 sm:space-y-4 pt-5 sm:pt-6 border-t border-[var(--card-border)]">
+                      <h3 className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.16em] sm:tracking-[0.18em] text-walnut-accent">
                         02 / Architectural Highlights &amp; Engineering Scope
                       </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
                         {activeProject.highlights.map((highlight, hIdx) => (
                           <div
                             key={hIdx}
-                            className="p-4 rounded-md bg-[var(--card-bg)] border border-[var(--card-border)] flex items-start gap-3.5"
+                            className="p-3.5 sm:p-4 rounded-md bg-[var(--card-bg)] border border-[var(--card-border)] flex items-start gap-3"
                           >
                             <span className="text-xs font-mono text-walnut-accent font-semibold mt-0.5 shrink-0">
                               {String(hIdx + 1).padStart(2, "0")}
@@ -907,15 +912,15 @@ export default function ProjectCarousel() {
                   )}
 
                 {/* ── Tech Stack ── */}
-                <div className="space-y-3 pt-6 border-t border-[var(--card-border)]">
-                  <h3 className="text-xs font-mono uppercase tracking-[0.18em] text-walnut-accent">
+                <div className="space-y-3 pt-5 sm:pt-6 border-t border-[var(--card-border)]">
+                  <h3 className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.16em] sm:tracking-[0.18em] text-walnut-accent">
                     03 / Technology Stack &amp; Protocols
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {activeProject.tech.map((t) => (
                       <span
                         key={t}
-                        className="text-xs font-mono px-3 py-1 rounded border border-[var(--card-border)] text-foreground/85 bg-[var(--card-bg)]"
+                        className="text-[11px] sm:text-xs font-mono px-2.5 sm:px-3 py-1 rounded border border-[var(--card-border)] text-foreground/85 bg-[var(--card-bg)]"
                       >
                         {t}
                       </span>
@@ -925,11 +930,13 @@ export default function ProjectCarousel() {
               </div>
 
               {/* Footer */}
-              <div className="px-6 sm:px-8 py-4 bg-[var(--card-bg-solid)] border-t border-[var(--card-border)] flex items-center justify-between text-xs font-mono text-foreground/55">
-                <span>Press ESC or click outside to close</span>
+              <div className="px-4 sm:px-8 py-3.5 sm:py-4 bg-[var(--card-bg-solid)] border-t border-[var(--card-border)] flex items-center justify-between gap-3 text-xs font-mono text-foreground/55">
+                <span className="hidden sm:inline">
+                  Press ESC or click outside to close
+                </span>
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="px-4 py-2 rounded-md bg-foreground text-[var(--background)] font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                  className="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-md bg-foreground text-[var(--background)] font-medium hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   Close Case Study
                 </button>

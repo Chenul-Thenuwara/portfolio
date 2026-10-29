@@ -12,16 +12,31 @@ export default function CinematicCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isFinePointer, setIsFinePointer] = useState(false);
 
   const mouseX = useMotionValue(-200);
   const mouseY = useMotionValue(-200);
 
-  // Ultra-responsive spring config — instantaneous tracking (mass 0.01) with zero latency while preserving smooth hover animations
   const springConfig = { stiffness: 2200, damping: 65, mass: 0.015 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Only enable custom cursor on devices with a fine pointer (mouse/trackpad)
+    const mediaQuery = window.matchMedia("(pointer: fine)");
+    setIsFinePointer(mediaQuery.matches);
+
+    const handlePointerChange = (e: MediaQueryListEvent) => {
+      setIsFinePointer(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handlePointerChange);
+    return () => mediaQuery.removeEventListener("change", handlePointerChange);
+  }, []);
+
+  useEffect(() => {
+    if (!isFinePointer) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -55,24 +70,32 @@ export default function CinematicCursor() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mouseout", handleMouseOut);
-      document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
-      document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
+      document.documentElement.removeEventListener(
+        "mouseleave",
+        handleMouseLeave
+      );
+      document.documentElement.removeEventListener(
+        "mouseenter",
+        handleMouseEnter
+      );
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY, isVisible, isFinePointer]);
 
-  // Hide default cursor on body
   useEffect(() => {
+    if (!isFinePointer) return;
+
     document.body.style.cursor = "none";
-    // Also hide cursor on all elements
     const style = document.createElement("style");
     style.id = "cinematic-cursor-style";
-    style.textContent = `*, *::before, *::after { cursor: none !important; }`;
+    style.textContent = `@media (pointer: fine) { *, *::before, *::after { cursor: none !important; } }`;
     document.head.appendChild(style);
     return () => {
       document.body.style.cursor = "";
       document.getElementById("cinematic-cursor-style")?.remove();
     };
-  }, []);
+  }, [isFinePointer]);
+
+  if (!isFinePointer) return null;
 
   return (
     <AnimatePresence>
@@ -104,7 +127,6 @@ export default function CinematicCursor() {
               xmlns="http://www.w3.org/2000/svg"
               style={{ display: "block" }}
             >
-              {/* Outer ring */}
               <circle
                 cx="18"
                 cy="18"
@@ -114,15 +136,46 @@ export default function CinematicCursor() {
                 strokeWidth={isHovering ? "1.5" : "1"}
                 fill="none"
               />
-              {/* Corner tick marks — minimalist geometric detail */}
-              <line x1="18" y1="2" x2="18" y2="6" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
-              <line x1="18" y1="30" x2="18" y2="34" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
-              <line x1="2" y1="18" x2="6" y2="18" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
-              <line x1="30" y1="18" x2="34" y2="18" stroke="var(--foreground)" strokeOpacity="0.45" strokeWidth="1" />
+              <line
+                x1="18"
+                y1="2"
+                x2="18"
+                y2="6"
+                stroke="var(--foreground)"
+                strokeOpacity="0.45"
+                strokeWidth="1"
+              />
+              <line
+                x1="18"
+                y1="30"
+                x2="18"
+                y2="34"
+                stroke="var(--foreground)"
+                strokeOpacity="0.45"
+                strokeWidth="1"
+              />
+              <line
+                x1="2"
+                y1="18"
+                x2="6"
+                y2="18"
+                stroke="var(--foreground)"
+                strokeOpacity="0.45"
+                strokeWidth="1"
+              />
+              <line
+                x1="30"
+                y1="18"
+                x2="34"
+                y2="18"
+                stroke="var(--foreground)"
+                strokeOpacity="0.45"
+                strokeWidth="1"
+              />
             </svg>
           </motion.div>
 
-          {/* Inner dot — 1:1 direct tracking without any spring delay */}
+          {/* Inner dot */}
           <motion.div
             className="fixed top-0 left-0 z-[9999] pointer-events-none"
             style={{

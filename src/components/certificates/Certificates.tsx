@@ -89,16 +89,16 @@ export default function Certificates() {
   return (
     <section
       id="certificates"
-      className="relative w-full py-24 md:py-32 px-6 md:px-12 bg-[var(--background)] overflow-hidden"
+      className="relative w-full py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 bg-[var(--background)] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 mb-12 border-b border-[var(--card-border)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-8 sm:pb-10 mb-8 sm:mb-12 border-b border-[var(--card-border)]">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent block mb-3">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent block mb-2.5 sm:mb-3">
               03 / Verified Credentials
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-foreground">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] text-foreground">
               Academic &amp; Technical Certifications
             </h2>
           </div>
@@ -108,11 +108,11 @@ export default function Certificates() {
         </div>
 
         {/* Architectural Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {certificates.map((cert) => (
             <div
               key={cert.index}
-              className="group rounded-lg border border-[var(--card-border)] bg-[var(--card-bg-solid)] hover:border-[var(--card-border-hover)] transition-colors duration-300 p-6 flex flex-col justify-between gap-6"
+              className="group rounded-lg border border-[var(--card-border)] bg-[var(--card-bg-solid)] hover:border-[var(--card-border-hover)] transition-colors duration-300 p-5 sm:p-6 flex flex-col justify-between gap-5 sm:gap-6"
             >
               <div>
                 {/* Top Index & Grade Bar */}

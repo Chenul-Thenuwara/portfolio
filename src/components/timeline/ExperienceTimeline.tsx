@@ -151,16 +151,16 @@ export default function ExperienceTimeline() {
   return (
     <section
       id="experience"
-      className="relative w-full py-24 md:py-32 bg-[var(--background)] px-6 md:px-12 border-b border-[var(--card-border)]"
+      className="relative w-full py-16 sm:py-24 md:py-32 bg-[var(--background)] px-4 sm:px-6 md:px-12 border-b border-[var(--card-border)]"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[var(--card-border)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-8 sm:pb-10 border-b border-[var(--card-border)]">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent block mb-3">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-walnut-accent block mb-2.5 sm:mb-3">
               02 / Experience &amp; Education
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-foreground">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] text-foreground">
               Career Progression &amp; Milestones
             </h2>
           </div>
@@ -174,21 +174,36 @@ export default function ExperienceTimeline() {
           {timelineData.map((item) => (
             <div
               key={item.index}
-              className="py-10 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start"
+              className="py-8 sm:py-10 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-start"
             >
               {/* Left Column: Metadata & Context (4 cols) */}
               <div className="lg:col-span-4 flex flex-col gap-2">
-                <div className="flex items-center gap-2.5 text-xs font-mono">
-                  <span className="text-walnut-accent font-semibold">
-                    {item.index}
-                  </span>
-                  <span className="text-foreground/25">/</span>
-                  <span className="text-foreground/80 font-medium">
-                    {item.date}
-                  </span>
+                <div className="flex flex-wrap items-center justify-between lg:justify-start gap-2 text-xs font-mono">
+                  <div className="flex items-center gap-2">
+                    <span className="text-walnut-accent font-semibold">
+                      {item.index}
+                    </span>
+                    <span className="text-foreground/25">/</span>
+                    <span className="text-foreground/80 font-medium">
+                      {item.date}
+                    </span>
+                  </div>
+
+                  {/* Mobile inline badges */}
+                  <div className="flex lg:hidden items-center gap-1.5">
+                    <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded border border-[var(--card-border)] bg-[var(--card-bg)] text-foreground/65">
+                      {item.category}
+                    </span>
+                    {item.active && (
+                      <span className="inline-flex items-center gap-1 text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        Active
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <div className="mt-1">
+                <div className="mt-0.5 sm:mt-1">
                   <p className="text-sm font-semibold text-foreground">
                     {item.organization}
                   </p>
@@ -202,7 +217,7 @@ export default function ExperienceTimeline() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 mt-2">
+                <div className="hidden lg:flex items-center gap-2 mt-2">
                   <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded border border-[var(--card-border)] bg-[var(--card-bg)] text-foreground/65">
                     {item.category}
                   </span>
@@ -217,7 +232,7 @@ export default function ExperienceTimeline() {
 
               {/* Right Column: Role, Responsibilities & Tech (8 cols) */}
               <div className="lg:col-span-8 flex flex-col">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-4">
+                <h3 className="text-lg sm:text-2xl font-bold text-foreground tracking-tight mb-3 sm:mb-4">
                   {item.role}
                 </h3>
 
