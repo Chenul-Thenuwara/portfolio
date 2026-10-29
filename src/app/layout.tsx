@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "Full-Stack Software Developer & Software Engineering Graduate (NSBM Green University & Plymouth University). Specializing in React, Next.js, TypeScript, Node.js, Electron, and local streaming systems.",
   keywords: [
     "Chenul Dulmika Thenuwara",
+    "Associate Software Engineer",
     "Full-Stack Developer",
     "Software Engineer",
     "React",
@@ -72,7 +73,11 @@ const personSchema = {
       "@id": "https://www.chenul-thenuwara.tech/#person",
       name: "Chenul Dulmika Thenuwara",
       alternateName: ["Chenul Thenuwara", "Chenul"],
-      jobTitle: "Full-Stack Software Developer",
+      jobTitle: "Associate Software Engineer",
+      worksFor: {
+        "@type": "Organization",
+        name: "Anunine Holdings",
+      },
       description:
         "Full-Stack Software Developer & Software Engineering Graduate from NSBM Green University and Plymouth University (UK). Specializing in React, Next.js, TypeScript, Node.js, Electron, and local streaming systems.",
       url: "https://www.chenul-thenuwara.tech",

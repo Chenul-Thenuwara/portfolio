@@ -29,13 +29,30 @@ interface TimelineEntry {
 
 const timelineData: TimelineEntry[] = [
   {
-    role: "Information Technology Intern",
+    role: "Associate Software Engineer",
     organization: "Anunine Holdings",
     employmentType: "Full-time",
     category: "Experience",
-    date: "Mar 2026 – Present",
+    date: "Oct 2026 – Present",
     location: "Dehiwala, Western Province, Sri Lanka · On-site",
     active: true,
+    bullets: [
+      "Architected a multi-tenant Enterprise IT Asset Management & Service Desk Portal using Next.js 16 and React 19.",
+      "Developed a business-hours SLA calculation engine in TypeScript, automating IT vendor billing reminders.",
+      "Implemented Role-Based Access Control (RBAC) across five distinct role portals, enhancing security and workflow efficiency.",
+      "Promoted to Associate Software Engineer following proven delivery of enterprise architectures and systems.",
+      "Leading ongoing full-stack engineering, production scalability, and internal system integration across subsidiaries.",
+    ],
+    tags: ["Next.js 16", "React 19", "TypeScript", "Enterprise Architecture", "RBAC", "Full-Stack"],
+  },
+  {
+    role: "Information Technology Intern",
+    organization: "Anunine Holdings",
+    employmentType: "Internship",
+    category: "Experience",
+    date: "Mar 2026 – Oct 2026 · 8 mos",
+    location: "Dehiwala, Western Province, Sri Lanka · On-site",
+    active: false,
     bullets: [
       "Architected a multi-tenant Enterprise IT Asset Management & Service Desk Portal using Next.js 16 and React 19.",
       "Developed a business-hours SLA calculation engine in TypeScript, automating IT vendor billing reminders.",

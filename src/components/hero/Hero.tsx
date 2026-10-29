@@ -201,7 +201,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            Information Technology Intern @ Anunine Holdings
+            Associate Software Engineer @ Anunine Holdings
           </span>
 
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono tracking-wider bg-white/5 text-foreground/70 border border-white/10 backdrop-blur-md">
